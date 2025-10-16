@@ -63,7 +63,7 @@
       }
     },
     {
-      "route": "/data/**/*.geojson",
+      "route": "/data/geojson/*.geojson",
       "headers": {
         "Content-Type": "application/geo+json; charset=UTF-8",
         "Cache-Control": "public, max-age=3600"
