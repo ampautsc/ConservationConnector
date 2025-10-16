@@ -3,34 +3,25 @@
     "rewrite": "/index.html",
     "exclude": ["/assets/*", "/data/*"]
   },
-  "mimeTypes": {
-    ".json": "application/json",
-    ".js": "application/javascript",
-    ".mjs": "application/javascript",
-    ".css": "text/css"
-  },
-  "globalHeaders": {
-    "Cache-Control": "no-cache, no-store, must-revalidate"
-  },
   "routes": [
     {
       "route": "/assets/*.js",
       "headers": {
-        "Content-Type": "application/javascript",
+        "Content-Type": "application/javascript; charset=UTF-8",
         "Cache-Control": "public, max-age=31536000, immutable"
       }
     },
     {
       "route": "/assets/*.mjs",
       "headers": {
-        "Content-Type": "application/javascript",
+        "Content-Type": "application/javascript; charset=UTF-8",
         "Cache-Control": "public, max-age=31536000, immutable"
       }
     },
     {
       "route": "/assets/*.css",
       "headers": {
-        "Content-Type": "text/css",
+        "Content-Type": "text/css; charset=UTF-8",
         "Cache-Control": "public, max-age=31536000, immutable"
       }
     },
@@ -41,10 +32,27 @@
       }
     },
     {
+      "route": "/data/*.json",
+      "headers": {
+        "Content-Type": "application/json; charset=UTF-8",
+        "Cache-Control": "public, max-age=3600"
+      }
+    },
+    {
       "route": "/data/*",
       "headers": {
         "Cache-Control": "public, max-age=3600"
       }
     }
-  ]
+  ],
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff",
+    "Cache-Control": "no-cache, no-store, must-revalidate"
+  },
+  "mimeTypes": {
+    ".json": "application/json",
+    ".js": "application/javascript",
+    ".mjs": "application/javascript",
+    ".css": "text/css"
+  }
 }
