@@ -35,13 +35,22 @@ function calculateGap(area1, area2) {
 }
 
 // Get color for heat map based on gap distance
-function getHeatMapColor(gap, minGap, maxGap) {
-  if (maxGap === minGap) return '#0000ff'; // All same, return blue
-  const normalized = (gap - minGap) / (maxGap - minGap);
-  // Interpolate from blue (0) to red (1)
-  const r = Math.round(normalized * 255);
-  const b = Math.round((1 - normalized) * 255);
-  return `rgb(${r}, 0, ${b})`;
+// Colors are assigned based on specific distance thresholds:
+// 0-25 miles: green
+// 25-50 miles: blue
+// 50-100 miles: orange
+function getHeatMapColor(gap) {
+  const gapInMiles = gap / 1609.34;
+  
+  if (gapInMiles <= 25) {
+    return '#00ff00'; // Green for 0-25 miles
+  } else if (gapInMiles <= 50) {
+    return '#0000ff'; // Blue for 25-50 miles
+  } else if (gapInMiles <= 100) {
+    return '#ffa500'; // Orange for 50-100 miles
+  }
+  
+  return null; // Don't draw lines over 100 miles
 }
 
 export default function ConservationMap() {
@@ -79,36 +88,26 @@ export default function ConservationMap() {
     if (!showHeatMap || allAreas.length < 2) return [];
     
     const lines = [];
-    const gaps = [];
     
-    // Calculate all gaps
+    // Create lines with colors, filtering by distance thresholds
     for (let i = 0; i < allAreas.length; i++) {
       for (let j = i + 1; j < allAreas.length; j++) {
         const gap = calculateGap(allAreas[i], allAreas[j]);
-        gaps.push(gap);
-      }
-    }
-    
-    const minGap = Math.min(...gaps);
-    const maxGap = Math.max(...gaps);
-    
-    // Create lines with colors
-    let lineIndex = 0;
-    for (let i = 0; i < allAreas.length; i++) {
-      for (let j = i + 1; j < allAreas.length; j++) {
-        const gap = gaps[lineIndex];
-        const color = getHeatMapColor(gap, minGap, maxGap);
-        lines.push({
-          positions: [
-            [allAreas[i].lat, allAreas[i].lng],
-            [allAreas[j].lat, allAreas[j].lng]
-          ],
-          color,
-          gap,
-          area1: allAreas[i].name,
-          area2: allAreas[j].name
-        });
-        lineIndex++;
+        const color = getHeatMapColor(gap);
+        
+        // Only add lines that are within our distance thresholds (≤100 miles)
+        if (color !== null) {
+          lines.push({
+            positions: [
+              [allAreas[i].lat, allAreas[i].lng],
+              [allAreas[j].lat, allAreas[j].lng]
+            ],
+            color,
+            gap,
+            area1: allAreas[i].name,
+            area2: allAreas[j].name
+          });
+        }
       }
     }
     
@@ -253,8 +252,16 @@ export default function ConservationMap() {
           <h3>Legend</h3>
           <div className="legend">
             <div className="legend-item">
-              <span className="legend-color" style={{background: 'linear-gradient(to right, blue, red)'}}></span>
-              <span>Gap: Small → Large</span>
+              <span className="legend-color" style={{background: '#00ff00', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
+              <span>0-25 miles</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-color" style={{background: '#0000ff', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
+              <span>25-50 miles</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-color" style={{background: '#ffa500', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
+              <span>50-100 miles</span>
             </div>
             <div className="legend-item">
               <span className="legend-circle existing"></span>
