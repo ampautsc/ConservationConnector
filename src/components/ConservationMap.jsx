@@ -56,7 +56,17 @@ export default function ConservationMap() {
   // Load initial conservation areas
   useEffect(() => {
     fetch('/data/conservation-areas.json')
-      .then(res => res.json())
+      .then(response => {
+        // Check if the response is successful (status in the 200-299 range)
+        if (!response.ok) {
+          // If not successful, read the response as text to see the error message
+          return response.text().then(text => {
+            throw new Error(`HTTP error! status: ${response.status}, body: ${text}`);
+          });
+        }
+        // If successful, proceed to parse as JSON
+        return response.json();
+      })
       .then(data => setConservationAreas(data))
       .catch(err => console.error('Error loading conservation areas:', err));
   }, []);
