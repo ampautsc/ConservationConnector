@@ -20,7 +20,7 @@ export default function HeatMapLayer({ conservationAreas, options = {} }) {
     const heatData = generateHeatMapData(conservationAreas);
     
     // Configure heat map options with gradient colors
-    // Soft gradient: light blue → cyan → light green → lime
+    // Soft cyan gradient: very light cyan → bright cyan
     const heatOptions = {
       radius: 25,
       blur: 20,
