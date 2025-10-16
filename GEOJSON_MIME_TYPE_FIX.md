@@ -44,7 +44,10 @@ This ensures that requests for `.geojson` files in the root directory are not re
 These routes ensure that:
 - `.geojson` files are served with the correct `application/json` MIME type
 - Files are cached for 1 hour (3600 seconds) for optimal performance
-- Both `/data/*.geojson` and `/data/geojson/*.geojson` patterns are covered
+- Both patterns are needed because Azure Static Web Apps wildcards (`*`) only match a single path segment:
+  - `/data/*.geojson` matches files like `/data/file.geojson`
+  - `/data/geojson/*.geojson` matches files like `/data/geojson/file.geojson` (current location)
+- Having both patterns provides forward compatibility for different file organization strategies
 
 ### 3. Added MIME Type Mapping
 ```json
