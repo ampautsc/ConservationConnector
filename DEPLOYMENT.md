@@ -144,9 +144,16 @@ Access monitoring in Azure Portal:
 
 **MIME Type Error for Module Scripts**
 - **Error**: "Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of 'application/octet-stream'"
-- **Cause**: Azure Static Web Apps may not automatically set correct MIME types for JavaScript modules
-- **Solution**: The `staticwebapp.config.json` includes explicit `Content-Type` headers for `/assets/*.js` and `/assets/*.css` files
-- If you still see this error, verify the configuration file is present in your repository root and has been deployed
+- **Cause**: Azure Static Web Apps may not automatically set correct MIME types for JavaScript modules, or may default to application/octet-stream
+- **Solution**: The `staticwebapp.config.json` includes:
+  - Explicit `mimeTypes` configuration mapping `.js`, `.mjs`, and `.jsx` to `application/javascript`
+  - Explicit route-specific `Content-Type: application/javascript` headers for `/assets/*.js` and `/assets/*.mjs` files
+  - Explicit `Content-Type: text/css` headers for `/assets/*.css` files
+- **Important**: After pushing changes to `staticwebapp.config.json`, wait for the GitHub Actions deployment to complete and verify the file is deployed to Azure
+- If you still see this error after deployment:
+  1. Check the GitHub Actions workflow logs to confirm successful deployment
+  2. Clear your browser cache or try in an incognito/private window
+  3. Verify the configuration file is present at your Azure Static Web Apps URL: `https://your-app.azurestaticapps.net/staticwebapp.config.json`
 
 **Data Files Not Loading**
 - Verify files are in `public/data/` directory
