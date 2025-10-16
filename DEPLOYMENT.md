@@ -90,7 +90,7 @@ This repository includes the following deployment configuration files:
 - Azure Static Web Apps configuration
 - Handles client-side routing (single-page application support)
 - Sets appropriate cache headers for assets and data files
-- Ensures JavaScript module files (.js, .mjs) are served with correct MIME type (application/javascript; charset=UTF-8)
+- Ensures JavaScript module files (.js, .mjs) are served with correct MIME type (text/javascript; charset=UTF-8)
 - Ensures CSS files are served with correct MIME type (text/css; charset=UTF-8)
 - Ensures `/data/*.json` files are served correctly with proper MIME types (application/json; charset=UTF-8)
 - Includes security header X-Content-Type-Options: nosniff to prevent MIME type sniffing attacks
@@ -147,10 +147,10 @@ Access monitoring in Azure Portal:
 - **Error**: "Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of 'application/octet-stream'"
 - **Cause**: Azure Static Web Apps may not automatically set correct MIME types for JavaScript modules, or may default to application/octet-stream
 - **Solution**: The `staticwebapp.config.json` includes:
-  - Explicit route-specific `Content-Type: application/javascript; charset=UTF-8` headers for `/assets/*.js` and `/assets/*.mjs` files
+  - Explicit route-specific `Content-Type: text/javascript; charset=UTF-8` headers for `/assets/*.js` and `/assets/*.mjs` files
   - Explicit `Content-Type: text/css; charset=UTF-8` headers for `/assets/*.css` files
   - Explicit `Content-Type: application/json; charset=UTF-8` headers for `/data/*.json` files
-  - Fallback `mimeTypes` configuration mapping `.js`, `.mjs` to `application/javascript` and `.css` to `text/css`
+  - Fallback `mimeTypes` configuration mapping `.js`, `.mjs` to `text/javascript` and `.css` to `text/css`
   - Security header `X-Content-Type-Options: nosniff` to prevent MIME type sniffing
 - **Important**: After pushing changes to `staticwebapp.config.json`, wait for the GitHub Actions deployment to complete and verify the file is deployed to Azure
 - If you still see this error after deployment:
