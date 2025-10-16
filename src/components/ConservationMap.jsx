@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { MapContainer, TileLayer, Circle, Popup, useMapEvents, Polyline } from 'react-leaflet';
+import { MapContainer, TileLayer, Circle, Popup, useMapEvents, Polyline, GeoJSON } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import './ConservationMap.css';
 
@@ -54,6 +54,7 @@ function getHeatMapColor(gap) {
 }
 
 export default function ConservationMap() {
+  const [geoJsonData, setGeoJsonData] = useState(null);
   const [conservationAreas, setConservationAreas] = useState([]);
   const [newAreas, setNewAreas] = useState([]);
   const [isAddingArea, setIsAddingArea] = useState(false);
@@ -62,9 +63,9 @@ export default function ConservationMap() {
   const [showHeatMap, setShowHeatMap] = useState(true);
   const [showAreas, setShowAreas] = useState(true);
 
-  // Load initial conservation areas
+  // Load GeoJSON data and transform to internal format for heat map calculations
   useEffect(() => {
-    fetch('/data/conservation-areas.json')
+    fetch('/data/geojson/us-national-parks.geojson')
       .then(response => {
         // Check if the response is successful (status in the 200-299 range)
         if (!response.ok) {
@@ -76,8 +77,25 @@ export default function ConservationMap() {
         // If successful, proceed to parse as JSON
         return response.json();
       })
-      .then(data => setConservationAreas(data))
-      .catch(err => console.error('Error loading conservation areas:', err));
+      .then(data => {
+        setGeoJsonData(data);
+        
+        // Transform GeoJSON features to internal format for heat map calculations
+        // GeoJSON coordinates are [longitude, latitude], we need [lat, lng]
+        const transformedAreas = data.features.map((feature, index) => ({
+          id: `park-${index}`,
+          name: feature.properties.name,
+          lat: feature.geometry.coordinates[1], // latitude
+          lng: feature.geometry.coordinates[0], // longitude
+          radius: Math.sqrt(feature.properties.area_km2) * 500, // Approximate radius based on area
+          description: feature.properties.description,
+          state: feature.properties.state,
+          established: feature.properties.established,
+          area_km2: feature.properties.area_km2
+        }));
+        setConservationAreas(transformedAreas);
+      })
+      .catch(err => console.error('Error loading GeoJSON data:', err));
   }, []);
 
   // All areas (existing + new)
@@ -284,8 +302,8 @@ export default function ConservationMap() {
       </div>
 
       <MapContainer 
-        center={[20, 0]} 
-        zoom={2} 
+        center={[39, -98]} 
+        zoom={4} 
         className="map"
         minZoom={2}
         maxZoom={18}
@@ -313,15 +331,48 @@ export default function ConservationMap() {
           </Polyline>
         ))}
         
-        {/* Conservation areas */}
-        {showAreas && allAreas.map(area => (
+        {/* Conservation areas from GeoJSON */}
+        {showAreas && geoJsonData && (
+          <GeoJSON 
+            data={geoJsonData}
+            pointToLayer={(feature, latlng) => {
+              // Create a circle marker for each point
+              const L = window.L;
+              return L.circleMarker(latlng, {
+                radius: 8,
+                fillColor: '#3388ff',
+                color: '#3388ff',
+                weight: 2,
+                opacity: 0.8,
+                fillOpacity: 0.4
+              });
+            }}
+            onEachFeature={(feature, layer) => {
+              // Bind popup to each feature
+              if (feature.properties) {
+                const props = feature.properties;
+                const popupContent = `
+                  <strong>${props.name}</strong><br />
+                  ${props.state}<br />
+                  Established: ${props.established}<br />
+                  Area: ${props.area_km2} km²<br />
+                  ${props.description}
+                `;
+                layer.bindPopup(popupContent);
+              }
+            }}
+          />
+        )}
+        
+        {/* New areas added by user (still using circles) */}
+        {showAreas && newAreas.map(area => (
           <Circle
             key={area.id}
             center={[area.lat, area.lng]}
             radius={area.radius}
             pathOptions={{
-              color: area.isNew ? '#00ff00' : '#3388ff',
-              fillColor: area.isNew ? '#00ff00' : '#3388ff',
+              color: '#00ff00',
+              fillColor: '#00ff00',
               fillOpacity: 0.3,
               weight: 2
             }}
@@ -330,7 +381,7 @@ export default function ConservationMap() {
               <strong>{area.name}</strong><br />
               {area.description}<br />
               Radius: {(area.radius / 1000).toFixed(0)} km
-              {area.isNew && <><br /><em>(New Area)</em></>}
+              <br /><em>(New Area)</em>
             </Popup>
           </Circle>
         ))}
