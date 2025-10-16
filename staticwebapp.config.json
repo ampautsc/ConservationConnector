@@ -1,7 +1,17 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/assets/*", "/data/*"]
+    "exclude": [
+      "/api/*",
+      "/favicon.ico",
+      "/robots.txt",
+      "/sitemap.xml",
+      "/assets/*",
+      "/data/*",
+      "/static/*",
+      "/_next/*",
+      "/*.{css,js,mjs,map,json,ico,png,jpg,jpeg,svg,webp,woff,woff2,ttf,otf,wasm,txt}"
+    ]
   },
   "routes": [
     {
@@ -68,6 +78,9 @@
     ".js": "text/javascript",
     ".mjs": "text/javascript",
     ".css": "text/css",
-    ".jsx": "text/javascript"
+    ".jsx": "text/javascript",
+    ".webmanifest": "application/manifest+json",
+    ".wasm": "application/wasm",
+    ".map": "application/json"
   }
 }

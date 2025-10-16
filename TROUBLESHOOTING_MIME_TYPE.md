@@ -15,6 +15,13 @@ Error: `Failed to load module script: Expected a JavaScript-or-Wasm module scrip
 - Added `.jsx` to mimeTypes mapping
 - Ensured routes are ordered correctly (most specific first)
 
+### Latest Fix - Comprehensive SPA Fallback Exclusions
+- **Root Cause Identified**: The SPA fallback was rewriting asset URLs to index.html, causing JavaScript files to be served as HTML with wrong MIME types
+- **Solution**: Expanded the `navigationFallback.exclude` list to prevent the fallback from rewriting actual asset requests
+- Added comprehensive file extension exclusions: `/*.{css,js,mjs,map,json,ico,png,jpg,jpeg,svg,webp,woff,woff2,ttf,otf,wasm,txt}`
+- Added standard path exclusions: `/api/*`, `/favicon.ico`, `/robots.txt`, `/sitemap.xml`, `/static/*`, `/_next/*`
+- Added modern asset MIME types: `.webmanifest`, `.wasm`, `.map`
+
 ## How Azure Static Web Apps Handles MIME Types
 
 Azure Static Web Apps determines MIME types in this order:
