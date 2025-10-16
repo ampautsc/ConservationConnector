@@ -98,7 +98,13 @@ Please provide the following information once setup is complete:
    → The GitHub secret is missing or has wrong name
 
 ❌ **"Build failed"**
-   → Check that Node.js version is 18+ in workflow (currently using Ubuntu latest which has Node 18+)
+   → Ensure Node.js version 20+ is being used (required by Vite 7)
+   → The workflow is configured to use Node.js 20
+
+❌ **"Deployment hangs at polling"**
+   → This issue has been fixed in the workflow
+   → The app is now built in GitHub Actions (not Azure Oryx)
+   → Uses `skip_app_build: true` to upload pre-built artifacts
 
 ❌ **"Application not loading"**
    → Verify `staticwebapp.config.json` is present and valid

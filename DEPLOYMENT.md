@@ -122,11 +122,17 @@ Access monitoring in Azure Portal:
 - Check GitHub Actions logs for specific errors
 - Verify `package.json` scripts are correct
 - Ensure all dependencies are listed in `package.json`
+- Confirm Node.js version 20+ is being used (required by Vite 7)
 
 **Deployment Fails**
 - Verify the `AZURE_STATIC_WEB_APPS_API_TOKEN` secret is set correctly
 - Check that the secret name matches the workflow file
 - Review Azure Portal deployment logs
+
+**Deployment Hangs at "Polling on deployment"**
+- This was a known issue with Azure's Oryx build system using Node.js 18 with Vite 7
+- **Solution**: The workflow now builds the app in GitHub Actions with Node.js 20+ and uses `skip_app_build: true`
+- If you still experience this issue, ensure the workflow file has been updated with the latest changes
 
 **Application Not Loading**
 - Check browser console for errors
