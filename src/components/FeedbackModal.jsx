@@ -78,8 +78,6 @@ const FeedbackModal = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  const isConfigured = githubAdapter.isConfigured();
-
   return (
     <div className="feedback-modal-overlay" onClick={onClose}>
       <div className="feedback-modal" onClick={(e) => e.stopPropagation()}>
@@ -89,12 +87,6 @@ const FeedbackModal = ({ isOpen, onClose }) => {
             ×
           </button>
         </div>
-
-        {!isConfigured && (
-          <div className="feedback-warning">
-            ⚠️ Feedback submission is not configured. Please contact the administrator to set up the GitHub token.
-          </div>
-        )}
 
         <form onSubmit={handleSubmit} className="feedback-form">
           <div className="form-group">
@@ -165,7 +157,7 @@ const FeedbackModal = ({ isOpen, onClose }) => {
             <button
               type="submit"
               className="button-primary"
-              disabled={isSubmitting || !isConfigured}
+              disabled={isSubmitting}
             >
               {isSubmitting ? 'Submitting...' : 'Submit Feedback'}
             </button>
