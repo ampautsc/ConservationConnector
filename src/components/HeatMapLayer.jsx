@@ -20,19 +20,18 @@ export default function HeatMapLayer({ conservationAreas, options = {} }) {
     const heatData = generateHeatMapData(conservationAreas);
     
     // Configure heat map options with gradient colors
-    // Green → Blue → Indigo → Violet
+    // Soft gradient: light blue → cyan → light green → lime
     const heatOptions = {
-      radius: 30,
-      blur: 25,
-      maxZoom: 10,
+      radius: 25,
+      blur: 20,
       max: 1.0,
-      minOpacity: 0.4,
+      minOpacity: 0.05,
       gradient: {
-        0.0: 'violet',    // 100 miles (lowest intensity)
-        0.25: 'violet',
-        0.5: 'indigo',    // 50 miles
-        0.75: 'blue',     // 25 miles
-        1.0: 'green'      // Conservation area (highest intensity)
+        0.0: '#e0f7fa',   // 100 miles (lowest intensity) - very light cyan
+        0.25: '#80deea',  // Light cyan
+        0.5: '#4dd0e1',   // Cyan
+        0.75: '#26c6da',  // Medium cyan
+        1.0: '#00bcd4'    // Conservation area (highest intensity) - bright cyan
       },
       ...options
     };
