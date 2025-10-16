@@ -25,9 +25,9 @@ export default function HeatMapLayer({ conservationAreas, options = {} }) {
       radius: 25,
       blur: 20,
       max: 1.0,
-      minOpacity: 0.05,
+      minOpacity: 0.2,
       gradient: {
-        0.0: '#e0f7fa',   // 100 miles (lowest intensity) - very light cyan
+        0.0: '#e0f7fa',   // 50 miles (lowest intensity) - very light cyan
         0.25: '#80deea',  // Light cyan
         0.5: '#4dd0e1',   // Cyan
         0.75: '#26c6da',  // Medium cyan

@@ -332,15 +332,15 @@ export default function ConservationMap() {
             </div>
             <div className="legend-item">
               <span className="legend-color" style={{background: '#26c6da', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
-              <span>25 miles</span>
+              <span>15 miles</span>
             </div>
             <div className="legend-item">
               <span className="legend-color" style={{background: '#4dd0e1', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
-              <span>50 miles</span>
+              <span>25 miles</span>
             </div>
             <div className="legend-item">
               <span className="legend-color" style={{background: '#80deea', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
-              <span>100 miles</span>
+              <span>50 miles</span>
             </div>
             <h4>Areas</h4>
             <div className="legend-item">
