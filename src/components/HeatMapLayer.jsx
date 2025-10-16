@@ -43,7 +43,9 @@ export default function HeatMapLayer({ conservationAreas, options = {} }) {
     
     // Cleanup function to remove layer when component unmounts
     return () => {
-      map.removeLayer(heatLayer);
+      if (map.hasLayer(heatLayer)) {
+        map.removeLayer(heatLayer);
+      }
     };
   }, [map, conservationAreas, options]);
   
