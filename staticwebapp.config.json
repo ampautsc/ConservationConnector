@@ -10,7 +10,7 @@
       "/data/*",
       "/static/*",
       "/_next/*",
-      "/*.{css,js,mjs,map,json,ico,png,jpg,jpeg,svg,webp,woff,woff2,ttf,otf,wasm,txt}"
+      "/*.{css,js,mjs,map,json,geojson,ico,png,jpg,jpeg,svg,webp,woff,woff2,ttf,otf,wasm,txt}"
     ]
   },
   "routes": [
@@ -63,6 +63,20 @@
       }
     },
     {
+      "route": "/data/*.geojson",
+      "headers": {
+        "Content-Type": "application/json; charset=UTF-8",
+        "Cache-Control": "public, max-age=3600"
+      }
+    },
+    {
+      "route": "/data/geojson/*.geojson",
+      "headers": {
+        "Content-Type": "application/json; charset=UTF-8",
+        "Cache-Control": "public, max-age=3600"
+      }
+    },
+    {
       "route": "/data/*",
       "headers": {
         "Cache-Control": "public, max-age=3600"
@@ -75,6 +89,7 @@
   },
   "mimeTypes": {
     ".json": "application/json",
+    ".geojson": "application/json",
     ".js": "text/javascript",
     ".mjs": "text/javascript",
     ".css": "text/css",
