@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { MapContainer, TileLayer, Circle, Popup, useMapEvents, Polyline, GeoJSON } from 'react-leaflet';
-import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './ConservationMap.css';
 
@@ -14,6 +13,34 @@ function MapClickHandler({ onMapClick, isAddingArea }) {
     },
   });
   return null;
+}
+
+// Calculate centroid of a polygon or multipolygon geometry
+function calculateCentroid(geometry) {
+  let totalLat = 0;
+  let totalLng = 0;
+  let totalPoints = 0;
+  
+  // Handle both Polygon and MultiPolygon
+  const polygons = geometry.type === 'MultiPolygon' 
+    ? geometry.coordinates 
+    : [geometry.coordinates];
+  
+  // Iterate through all polygons and their rings
+  for (const polygon of polygons) {
+    // Only use the outer ring (first array) for centroid calculation
+    const outerRing = polygon[0];
+    for (const [lng, lat] of outerRing) {
+      totalLng += lng;
+      totalLat += lat;
+      totalPoints++;
+    }
+  }
+  
+  return {
+    lat: totalLat / totalPoints,
+    lng: totalLng / totalPoints
+  };
 }
 
 // Calculate distance between two points using Haversine formula (in meters)
@@ -66,7 +93,7 @@ export default function ConservationMap() {
 
   // Load GeoJSON data and transform to internal format for heat map calculations
   useEffect(() => {
-    fetch('/data/geojson/us-national-parks.geojson')
+    fetch('/data/geojson/us-national-parks-polygons.geojson')
       .then(response => {
         // Check if the response is successful (status in the 200-299 range)
         if (!response.ok) {
@@ -82,20 +109,23 @@ export default function ConservationMap() {
         setGeoJsonData(data);
         
         // Transform GeoJSON features to internal format for heat map calculations
-        // GeoJSON coordinates are [longitude, latitude], we need [lat, lng]
-        const transformedAreas = data.features.map((feature, index) => ({
-          id: `park-${index}`,
-          name: feature.properties.name,
-          lat: feature.geometry.coordinates[1], // latitude
-          lng: feature.geometry.coordinates[0], // longitude
-          // Approximate radius based on area: using square root to convert area to radius-like value,
-          // then scaling by 500 to get a reasonable visual representation in meters
-          radius: Math.sqrt(feature.properties.area_km2) * 500,
-          description: feature.properties.description,
-          state: feature.properties.state,
-          established: feature.properties.established,
-          area_km2: feature.properties.area_km2
-        }));
+        // Calculate centroids for polygon geometries
+        const transformedAreas = data.features.map((feature, index) => {
+          const centroid = calculateCentroid(feature.geometry);
+          return {
+            id: `park-${index}`,
+            name: feature.properties.name,
+            lat: centroid.lat,
+            lng: centroid.lng,
+            // Approximate radius based on area: using square root to convert area to radius-like value,
+            // then scaling by 500 to get a reasonable visual representation in meters
+            radius: Math.sqrt(feature.properties.area_km2 || 100) * 500,
+            description: feature.properties.description || feature.properties.name,
+            state: feature.properties.state || 'Unknown',
+            established: feature.properties.established || 0,
+            area_km2: feature.properties.area_km2 || 0
+          };
+        });
         setConservationAreas(transformedAreas);
       })
       .catch(err => console.error('Error loading GeoJSON data:', err));
@@ -334,21 +364,17 @@ export default function ConservationMap() {
           </Polyline>
         ))}
         
-        {/* Conservation areas from GeoJSON */}
+        {/* Conservation areas from GeoJSON - now showing actual shapes */}
         {showAreas && geoJsonData && (
           <GeoJSON 
             data={geoJsonData}
-            pointToLayer={(feature, latlng) => {
-              // Create a circle marker for each point
-              return L.circleMarker(latlng, {
-                radius: 8,
-                fillColor: '#3388ff',
-                color: '#3388ff',
-                weight: 2,
-                opacity: 0.8,
-                fillOpacity: 0.4
-              });
-            }}
+            style={() => ({
+              fillColor: '#3388ff',
+              color: '#2266cc',
+              weight: 2,
+              opacity: 0.8,
+              fillOpacity: 0.4
+            })}
             onEachFeature={(feature, layer) => {
               // Bind popup to each feature
               if (feature.properties) {
@@ -356,8 +382,8 @@ export default function ConservationMap() {
                 const popupContent = `
                   <strong>${props.name}</strong><br />
                   ${props.state}<br />
-                  Established: ${props.established}<br />
-                  Area: ${props.area_km2} km²<br />
+                  ${props.established ? `Established: ${props.established}<br />` : ''}
+                  ${props.area_km2 ? `Area: ${props.area_km2} km²<br />` : ''}
                   ${props.description}
                 `;
                 layer.bindPopup(popupContent);
