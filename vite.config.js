@@ -13,12 +13,18 @@ export default defineConfig({
     react(),
     {
       name: 'copy-staticwebapp-config',
-      closeBundle() {
+      writeBundle() {
         // Copy staticwebapp.config.json to dist folder for Azure Static Web Apps
-        copyFileSync(
-          resolve(__dirname, 'staticwebapp.config.json'),
-          resolve(__dirname, 'dist/staticwebapp.config.json')
-        )
+        try {
+          copyFileSync(
+            resolve(__dirname, 'staticwebapp.config.json'),
+            resolve(__dirname, 'dist/staticwebapp.config.json')
+          )
+          console.log('✓ Copied staticwebapp.config.json to dist folder')
+        } catch (error) {
+          console.error('Failed to copy staticwebapp.config.json:', error.message)
+          throw error
+        }
       }
     }
   ],
