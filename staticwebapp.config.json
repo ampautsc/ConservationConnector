@@ -5,6 +5,20 @@
   },
   "routes": [
     {
+      "route": "/*.js",
+      "headers": {
+        "Content-Type": "text/javascript; charset=UTF-8",
+        "Cache-Control": "no-cache, no-store, must-revalidate"
+      }
+    },
+    {
+      "route": "/*.mjs",
+      "headers": {
+        "Content-Type": "text/javascript; charset=UTF-8",
+        "Cache-Control": "no-cache, no-store, must-revalidate"
+      }
+    },
+    {
       "route": "/assets/*.js",
       "headers": {
         "Content-Type": "text/javascript; charset=UTF-8",
@@ -53,6 +67,7 @@
     ".json": "application/json",
     ".js": "text/javascript",
     ".mjs": "text/javascript",
-    ".css": "text/css"
+    ".css": "text/css",
+    ".jsx": "text/javascript"
   }
 }
