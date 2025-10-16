@@ -47,7 +47,9 @@ export class GitHubAdapter {
 
     // Prepare the content
     const content = JSON.stringify(feedback, null, 2);
-    const encodedContent = btoa(unescape(encodeURIComponent(content)));
+    const encodedContent = btoa(encodeURIComponent(content).replace(/%([0-9A-F]{2})/g, (_, p1) => {
+      return String.fromCharCode(parseInt(p1, 16));
+    }));
 
     // Prepare commit message
     const commitMessage = `Add user feedback: ${feedback.subject}`;

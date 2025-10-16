@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { GitHubAdapter } from '../api/GitHubAdapter';
 import './FeedbackModal.css';
 
@@ -17,7 +17,7 @@ const FeedbackModal = ({ isOpen, onClose }) => {
   const [submitStatus, setSubmitStatus] = useState('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const githubAdapter = new GitHubAdapter();
+  const githubAdapter = useMemo(() => new GitHubAdapter(), []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
