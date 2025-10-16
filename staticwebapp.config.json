@@ -4,7 +4,10 @@
     "exclude": ["/assets/*", "/data/*"]
   },
   "mimeTypes": {
-    ".json": "application/json"
+    ".json": "application/json",
+    ".js": "text/javascript",
+    ".mjs": "text/javascript",
+    ".css": "text/css"
   },
   "globalHeaders": {
     "Cache-Control": "no-cache, no-store, must-revalidate"
