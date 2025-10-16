@@ -28,14 +28,20 @@ To enable feedback submission, you need to configure a GitHub Personal Access To
    - Select the **"repo"** scope
    - Generate the token and copy it
 
-2. **Add the token to your environment:**
-   - For local development: Create a `.env` file in the project root with:
+2. **Add the token as a GitHub Secret:**
+   - **For production (GitHub Actions):**
+     1. Go to your GitHub repository
+     2. Navigate to Settings > Secrets and variables > Actions
+     3. Click "New repository secret"
+     4. Name: `VITE_GITHUB_TOKEN`
+     5. Value: Paste your GitHub Personal Access Token
+     6. Click "Add secret"
+   - **For local development:** Create a `.env` file in the project root with:
      ```
      VITE_GITHUB_TOKEN=your_github_token_here
      ```
-   - For Azure Static Web Apps: Add it in the Configuration settings as `VITE_GITHUB_TOKEN`
 
-⚠️ **Important:** Never commit your `.env` file or expose your GitHub token in code.
+⚠️ **Important:** Never commit your `.env` file or expose your GitHub token in code. Always use GitHub Secrets for production deployments.
 
 ## Notes
 

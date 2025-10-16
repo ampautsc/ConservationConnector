@@ -5,19 +5,25 @@
  * Configuration:
  * To enable feedback submission, set the VITE_GITHUB_TOKEN environment variable.
  * This can be done by:
- * 1. Creating a .env file in the project root with: VITE_GITHUB_TOKEN=your_github_token
- * 2. Setting it in your build/deployment environment (e.g., Azure Static Web Apps Configuration)
+ * 1. For local development: Create a .env file in the project root with: VITE_GITHUB_TOKEN=your_github_token
+ * 2. For production: Add the token as a GitHub Secret (see instructions below)
  * 
  * The GitHub token needs the following permissions:
  * - repo scope (to create files in the repository)
  * 
- * To create a GitHub token:
+ * To set up the GitHub Secret:
  * 1. Go to GitHub Settings > Developer settings > Personal access tokens > Tokens (classic)
  * 2. Click "Generate new token (classic)"
  * 3. Give it a descriptive name (e.g., "ConservationConnector Feedback")
  * 4. Select the "repo" scope
  * 5. Generate the token and copy it
- * 6. Add it as VITE_GITHUB_TOKEN in your environment
+ * 6. Go to your GitHub repository > Settings > Secrets and variables > Actions
+ * 7. Click "New repository secret"
+ * 8. Name: VITE_GITHUB_TOKEN
+ * 9. Value: Paste your token
+ * 10. Click "Add secret"
+ * 
+ * The GitHub Actions workflow will automatically use this secret during the build process.
  */
 export class GitHubAdapter {
   constructor() {
