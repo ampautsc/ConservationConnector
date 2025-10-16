@@ -90,6 +90,8 @@ This repository includes the following deployment configuration files:
 - Azure Static Web Apps configuration
 - Handles client-side routing (single-page application support)
 - Sets appropriate cache headers for assets and data files
+- Ensures JavaScript module files are served with correct MIME type (`text/javascript`)
+- Ensures CSS files are served with correct MIME type (`text/css`)
 - Ensures `/data/*.json` files are served correctly with proper MIME types
 
 ### Custom Domain (Optional)
@@ -139,6 +141,12 @@ Access monitoring in Azure Portal:
 - Verify build was successful in GitHub Actions
 - Check Azure Portal deployment status
 - Ensure `staticwebapp.config.json` is present
+
+**MIME Type Error for Module Scripts**
+- **Error**: "Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of 'application/octet-stream'"
+- **Cause**: Azure Static Web Apps may not automatically set correct MIME types for JavaScript modules
+- **Solution**: The `staticwebapp.config.json` includes explicit `Content-Type` headers for `/assets/*.js` and `/assets/*.css` files
+- If you still see this error, verify the configuration file is present in your repository root and has been deployed
 
 **Data Files Not Loading**
 - Verify files are in `public/data/` directory
