@@ -327,19 +327,19 @@ export default function ConservationMap() {
             </div>
             <h4>Gradient Heat Map</h4>
             <div className="legend-item">
-              <span className="legend-color" style={{background: 'green', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
+              <span className="legend-color" style={{background: '#00bcd4', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
               <span>Conservation Area (0 mi)</span>
             </div>
             <div className="legend-item">
-              <span className="legend-color" style={{background: 'blue', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
+              <span className="legend-color" style={{background: '#26c6da', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
               <span>25 miles</span>
             </div>
             <div className="legend-item">
-              <span className="legend-color" style={{background: 'indigo', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
+              <span className="legend-color" style={{background: '#4dd0e1', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
               <span>50 miles</span>
             </div>
             <div className="legend-item">
-              <span className="legend-color" style={{background: 'violet', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
+              <span className="legend-color" style={{background: '#80deea', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
               <span>100 miles</span>
             </div>
             <h4>Areas</h4>
