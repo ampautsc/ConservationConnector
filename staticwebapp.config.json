@@ -1,7 +1,7 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["/assets/*", "/data/*", "/src/*"]
+    "exclude": ["/assets/*", "/data/*"]
   },
   "mimeTypes": {
     ".json": "application/json",
@@ -13,10 +13,6 @@
     "Cache-Control": "no-cache, no-store, must-revalidate"
   },
   "routes": [
-    {
-      "route": "/src/*",
-      "statusCode": 404
-    },
     {
       "route": "/assets/*.js",
       "headers": {
