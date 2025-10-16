@@ -28,6 +28,8 @@ export default defineConfig({
       }
     }
   ],
+  base: '/',              // important for correct asset URLs on SWA
+  build: { outDir: 'dist' },
   publicDir: 'public',
   server: {
     fs: {
