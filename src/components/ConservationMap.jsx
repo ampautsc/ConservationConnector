@@ -101,12 +101,12 @@ export default function ConservationMap() {
         lines.push({
           positions: [
             [allAreas[i].lat, allAreas[i].lng],
-            [allAreas[j].lat, allAreas[j].lng],
+            [allAreas[j].lat, allAreas[j].lng]
           ],
           color,
           gap,
           area1: allAreas[i].name,
-          area2: allAreas[j].name,
+          area2: allAreas[j].name
         });
         lineIndex++;
       }
@@ -126,7 +126,7 @@ export default function ConservationMap() {
       lng: latlng.lng,
       radius: newAreaRadius,
       description: 'User-added conservation area',
-      isNew: true,
+      isNew: true
     };
     
     setNewAreas(prev => [...prev, newArea]);
@@ -144,7 +144,7 @@ export default function ConservationMap() {
     // For now, we'll simulate saving to file
     const dataToSave = {
       timestamp: new Date().toISOString(),
-      areas: newAreas,
+      areas: newAreas
     };
 
     console.log('Submitting new areas:', dataToSave);
@@ -316,7 +316,7 @@ export default function ConservationMap() {
               color: area.isNew ? '#00ff00' : '#3388ff',
               fillColor: area.isNew ? '#00ff00' : '#3388ff',
               fillOpacity: 0.3,
-              weight: 2,
+              weight: 2
             }}
           >
             <Popup>

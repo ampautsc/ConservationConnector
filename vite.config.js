@@ -25,13 +25,13 @@ export default defineConfig({
           console.error('Failed to copy staticwebapp.config.json:', error.message)
           throw error
         }
-      },
-    },
+      }
+    }
   ],
   publicDir: 'public',
   server: {
     fs: {
-      allow: ['..'],
-    },
-  },
+      allow: ['..']
+    }
+  }
 })
