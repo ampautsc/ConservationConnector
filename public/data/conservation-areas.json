@@ -8,59 +8,59 @@
     "description": "First National Park in the United States"
   },
   {
-    "id": "serengeti",
-    "name": "Serengeti National Park",
-    "lat": -2.3333,
-    "lng": 34.8333,
-    "radius": 70000,
-    "description": "Famous for annual migration of over 1.5 million wildebeest"
+    "id": "grand-teton",
+    "name": "Grand Teton National Park",
+    "lat": 43.7904,
+    "lng": -110.8024,
+    "radius": 30000,
+    "description": "Features the Teton Range and Jackson Hole valley"
   },
   {
-    "id": "great-barrier",
-    "name": "Great Barrier Reef Marine Park",
-    "lat": -18.2871,
-    "lng": 147.6992,
-    "radius": 100000,
-    "description": "World's largest coral reef system"
+    "id": "zion",
+    "name": "Zion National Park",
+    "lat": 37.2982,
+    "lng": -113.0263,
+    "radius": 20000,
+    "description": "Notable for its steep red cliffs"
   },
   {
-    "id": "amazon",
-    "name": "Amazon Rainforest Reserve",
-    "lat": -3.4653,
-    "lng": -62.2159,
-    "radius": 150000,
-    "description": "Largest tropical rainforest in the world"
+    "id": "bryce-canyon",
+    "name": "Bryce Canyon National Park",
+    "lat": 37.5930,
+    "lng": -112.1871,
+    "radius": 15000,
+    "description": "Famous for its unique geological hoodoos"
   },
   {
-    "id": "galapagos",
-    "name": "Galápagos National Park",
-    "lat": -0.9538,
-    "lng": -90.9656,
-    "radius": 40000,
-    "description": "UNESCO World Heritage Site with unique biodiversity"
+    "id": "capitol-reef",
+    "name": "Capitol Reef National Park",
+    "lat": 38.2872,
+    "lng": -111.2615,
+    "radius": 25000,
+    "description": "Features colorful canyons and ridges"
   },
   {
-    "id": "kruger",
-    "name": "Kruger National Park",
-    "lat": -23.9884,
-    "lng": 31.5547,
-    "radius": 60000,
-    "description": "One of Africa's largest game reserves"
+    "id": "arches",
+    "name": "Arches National Park",
+    "lat": 38.7331,
+    "lng": -109.5925,
+    "radius": 18000,
+    "description": "Contains over 2,000 natural sandstone arches"
   },
   {
-    "id": "banff",
-    "name": "Banff National Park",
-    "lat": 51.4968,
-    "lng": -115.9281,
+    "id": "canyonlands",
+    "name": "Canyonlands National Park",
+    "lat": 38.3269,
+    "lng": -109.8783,
     "radius": 35000,
-    "description": "Canada's oldest national park"
+    "description": "Colorful landscape carved by the Colorado River"
   },
   {
-    "id": "antarctica",
-    "name": "Antarctic Specially Protected Area",
-    "lat": -75.2509,
-    "lng": -0.0715,
-    "radius": 80000,
-    "description": "Protected region in Antarctica"
+    "id": "grand-canyon",
+    "name": "Grand Canyon National Park",
+    "lat": 36.0544,
+    "lng": -112.1401,
+    "radius": 50000,
+    "description": "Steep-sided canyon carved by the Colorado River"
   }
 ]
