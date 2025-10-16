@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { MapContainer, TileLayer, Circle, Popup, useMapEvents, Polyline, GeoJSON } from 'react-leaflet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './ConservationMap.css';
 
@@ -87,7 +88,9 @@ export default function ConservationMap() {
           name: feature.properties.name,
           lat: feature.geometry.coordinates[1], // latitude
           lng: feature.geometry.coordinates[0], // longitude
-          radius: Math.sqrt(feature.properties.area_km2) * 500, // Approximate radius based on area
+          // Approximate radius based on area: using square root to convert area to radius-like value,
+          // then scaling by 500 to get a reasonable visual representation in meters
+          radius: Math.sqrt(feature.properties.area_km2) * 500,
           description: feature.properties.description,
           state: feature.properties.state,
           established: feature.properties.established,
@@ -337,7 +340,6 @@ export default function ConservationMap() {
             data={geoJsonData}
             pointToLayer={(feature, latlng) => {
               // Create a circle marker for each point
-              const L = window.L;
               return L.circleMarker(latlng, {
                 radius: 8,
                 fillColor: '#3388ff',
