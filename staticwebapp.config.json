@@ -7,13 +7,16 @@
     ".json": "application/json",
     ".js": "application/javascript",
     ".mjs": "application/javascript",
-    ".jsx": "application/javascript",
     ".css": "text/css"
   },
   "globalHeaders": {
     "Cache-Control": "no-cache, no-store, must-revalidate"
   },
   "routes": [
+    {
+      "route": "/src/*",
+      "statusCode": 404
+    },
     {
       "route": "/assets/*.js",
       "headers": {
