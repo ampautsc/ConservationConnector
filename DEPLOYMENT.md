@@ -90,8 +90,8 @@ This repository includes the following deployment configuration files:
 - Azure Static Web Apps configuration
 - Handles client-side routing (single-page application support)
 - Sets appropriate cache headers for assets and data files
-- Ensures JavaScript module files are served with correct MIME type (`text/javascript`)
-- Ensures CSS files are served with correct MIME type (`text/css`)
+- Ensures JavaScript module files are served with correct MIME type (text/javascript)
+- Ensures CSS files are served with correct MIME type (text/css)
 - Ensures `/data/*.json` files are served correctly with proper MIME types
 
 ### Custom Domain (Optional)
