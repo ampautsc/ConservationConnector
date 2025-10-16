@@ -18,9 +18,9 @@ Contains comprehensive data for 63 US National Parks in GeoJSON format.
 - `description`: Brief description of the park's features
 - `coordinates`: [longitude, latitude] in decimal degrees
 
-**Data Source**: Compiled from official National Park Service information.
+**Data Source**: Compiled from National Park Service official data and public information sources.
 
-**Last Updated**: October 2024
+**Last Updated**: October 16, 2025
 
 ## Usage
 
