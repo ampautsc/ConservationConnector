@@ -1,4 +1,4 @@
-# Deployment Fix - October 2025
+# Deployment Fix
 
 ## Problem
 The web application was not loading correctly in production on Azure Static Web Apps. The browser console showed:
