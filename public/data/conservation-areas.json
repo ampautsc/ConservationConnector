@@ -1,0 +1,66 @@
+[
+  {
+    "id": "yellowstone",
+    "name": "Yellowstone National Park",
+    "lat": 44.4280,
+    "lng": -110.5885,
+    "radius": 50000,
+    "description": "First National Park in the United States"
+  },
+  {
+    "id": "serengeti",
+    "name": "Serengeti National Park",
+    "lat": -2.3333,
+    "lng": 34.8333,
+    "radius": 70000,
+    "description": "Famous for annual migration of over 1.5 million wildebeest"
+  },
+  {
+    "id": "great-barrier",
+    "name": "Great Barrier Reef Marine Park",
+    "lat": -18.2871,
+    "lng": 147.6992,
+    "radius": 100000,
+    "description": "World's largest coral reef system"
+  },
+  {
+    "id": "amazon",
+    "name": "Amazon Rainforest Reserve",
+    "lat": -3.4653,
+    "lng": -62.2159,
+    "radius": 150000,
+    "description": "Largest tropical rainforest in the world"
+  },
+  {
+    "id": "galapagos",
+    "name": "Galápagos National Park",
+    "lat": -0.9538,
+    "lng": -90.9656,
+    "radius": 40000,
+    "description": "UNESCO World Heritage Site with unique biodiversity"
+  },
+  {
+    "id": "kruger",
+    "name": "Kruger National Park",
+    "lat": -23.9884,
+    "lng": 31.5547,
+    "radius": 60000,
+    "description": "One of Africa's largest game reserves"
+  },
+  {
+    "id": "banff",
+    "name": "Banff National Park",
+    "lat": 51.4968,
+    "lng": -115.9281,
+    "radius": 35000,
+    "description": "Canada's oldest national park"
+  },
+  {
+    "id": "antarctica",
+    "name": "Antarctic Specially Protected Area",
+    "lat": -75.2509,
+    "lng": -0.0715,
+    "radius": 80000,
+    "description": "Protected region in Antarctica"
+  }
+]
