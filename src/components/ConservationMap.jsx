@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 import { MapContainer, TileLayer, Circle, Popup, useMapEvents, Polyline, GeoJSON } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import './ConservationMap.css';
+import HeatMapLayer from './HeatMapLayer';
 
 // Component to handle map clicks for adding new areas
 function MapClickHandler({ onMapClick, isAddingArea }) {
@@ -90,6 +91,7 @@ export default function ConservationMap() {
   const [newAreaName, setNewAreaName] = useState('');
   const [showHeatMap, setShowHeatMap] = useState(true);
   const [showAreas, setShowAreas] = useState(true);
+  const [showGradientHeatMap, setShowGradientHeatMap] = useState(false);
 
   // Load GeoJSON data and transform to internal format for heat map calculations
   useEffect(() => {
@@ -241,7 +243,15 @@ export default function ConservationMap() {
               checked={showHeatMap} 
               onChange={(e) => setShowHeatMap(e.target.checked)}
             />
-            Show Heat Map
+            Show Connection Lines
+          </label>
+          <label>
+            <input 
+              type="checkbox" 
+              checked={showGradientHeatMap} 
+              onChange={(e) => setShowGradientHeatMap(e.target.checked)}
+            />
+            Show Gradient Heat Map
           </label>
         </div>
 
@@ -302,6 +312,7 @@ export default function ConservationMap() {
         <div className="tool-section">
           <h3>Legend</h3>
           <div className="legend">
+            <h4>Connection Lines</h4>
             <div className="legend-item">
               <span className="legend-color" style={{background: '#00ff00', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
               <span>0-25 miles</span>
@@ -314,6 +325,24 @@ export default function ConservationMap() {
               <span className="legend-color" style={{background: '#ffa500', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
               <span>50-100 miles</span>
             </div>
+            <h4>Gradient Heat Map</h4>
+            <div className="legend-item">
+              <span className="legend-color" style={{background: 'green', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
+              <span>Conservation Area (0 mi)</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-color" style={{background: 'blue', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
+              <span>25 miles</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-color" style={{background: 'indigo', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
+              <span>50 miles</span>
+            </div>
+            <div className="legend-item">
+              <span className="legend-color" style={{background: 'violet', width: '20px', height: '10px', display: 'inline-block', marginRight: '5px'}}></span>
+              <span>100 miles</span>
+            </div>
+            <h4>Areas</h4>
             <div className="legend-item">
               <span className="legend-circle existing"></span>
               <span>Existing Areas</span>
@@ -347,6 +376,9 @@ export default function ConservationMap() {
         />
         
         <MapClickHandler onMapClick={handleMapClick} isAddingArea={isAddingArea} />
+        
+        {/* Gradient heat map layer */}
+        {showGradientHeatMap && <HeatMapLayer conservationAreas={allAreas} />}
         
         {/* Heat map lines */}
         {showHeatMap && heatMapLines.map((line, idx) => (
