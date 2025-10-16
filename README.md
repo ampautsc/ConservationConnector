@@ -40,6 +40,10 @@ Build for production:
 npm run build
 ```
 
+## Deployment
+
+This application is configured for deployment to Azure Static Web Apps. For detailed deployment instructions, including Azure resource setup and configuration, see [DEPLOYMENT.md](DEPLOYMENT.md).
+
 ## Usage
 
 1. **View Existing Areas**: The map loads with pre-existing conservation areas displayed as blue circles
