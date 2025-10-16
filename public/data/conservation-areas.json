@@ -21,7 +21,7 @@
     "lat": 37.2982,
     "lng": -113.0263,
     "radius": 20000,
-    "description": "Notable for its steep red cliffs"
+    "description": "Notable for its steep red cliffs and unique geography carved by the Virgin River"
   },
   {
     "id": "bryce-canyon",
@@ -61,6 +61,6 @@
     "lat": 36.0544,
     "lng": -112.1401,
     "radius": 50000,
-    "description": "Steep-sided canyon carved by the Colorado River"
+    "description": "Steep-sided canyon carved by the Colorado River, exhibiting two billion years of geological history"
   }
 ]
