@@ -58,12 +58,6 @@ This PR updates conservation site data files with accurate polygon boundaries in
 - ✅ No external network access
 - ✅ No eval() or dynamic code execution
 
-**scripts/update-missouri-from-polygons.cjs**:
-- ✅ Reads from local files only
-- ✅ Writes to known directory structure
-- ✅ No external network access
-- ✅ No eval() or dynamic code execution
-
 **scripts/fetch-padus-boundaries.cjs**:
 - ✅ Documentation only (console output)
 - ✅ No file modifications
@@ -75,12 +69,6 @@ This PR updates conservation site data files with accurate polygon boundaries in
 - ✅ Writes to known directory structure
 - ✅ No external network access
 - ✅ Input validation through JSON parsing
-
-**scripts/update-missouri-sites.cjs**:
-- ⚠️ Uses child_process.execSync for ogr2ogr
-- ✅ File paths are hardcoded, not user-provided
-- ✅ Not used in production (maintenance script only)
-- ✅ ogr2ogr tool validation before execution
 
 ### Data Integrity
 
