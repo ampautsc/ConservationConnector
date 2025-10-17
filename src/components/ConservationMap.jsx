@@ -92,7 +92,6 @@ export default function ConservationMap() {
   const [newAreaName, setNewAreaName] = useState('');
   const [showHeatMap, setShowHeatMap] = useState(true);
   const [showAreas, setShowAreas] = useState(true);
-  const [showSiteAreas, setShowSiteAreas] = useState(true);
   const [showGradientHeatMap, setShowGradientHeatMap] = useState(false);
 
   // Load GeoJSON data and transform to internal format for heat map calculations
@@ -307,14 +306,6 @@ export default function ConservationMap() {
           <label>
             <input 
               type="checkbox" 
-              checked={showSiteAreas} 
-              onChange={(e) => setShowSiteAreas(e.target.checked)}
-            />
-            Show Conservation Sites
-          </label>
-          <label>
-            <input 
-              type="checkbox" 
               checked={showHeatMap} 
               onChange={(e) => setShowHeatMap(e.target.checked)}
             />
@@ -423,10 +414,6 @@ export default function ConservationMap() {
               <span>US National Parks</span>
             </div>
             <div className="legend-item">
-              <span style={{width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ff8833', border: '2px solid #ff6600', display: 'inline-block', marginRight: '5px'}}></span>
-              <span>Conservation Sites</span>
-            </div>
-            <div className="legend-item">
               <span className="legend-circle new"></span>
               <span>New Areas</span>
             </div>
@@ -504,28 +491,7 @@ export default function ConservationMap() {
           />
         )}
         
-        {/* Conservation site areas from individual JSON files */}
-        {showSiteAreas && siteAreas.map(area => (
-          <Circle
-            key={area.id}
-            center={[area.lat, area.lng]}
-            radius={area.radius}
-            pathOptions={{
-              color: '#ff6600',
-              fillColor: '#ff8833',
-              fillOpacity: 0.3,
-              weight: 2
-            }}
-          >
-            <Popup>
-              <strong>{area.name}</strong><br />
-              {area.state}<br />
-              {area.designation}<br />
-              {area.area_km2 ? `Area: ${area.area_km2.toFixed(1)} km²<br />` : ''}
-              {area.description}
-            </Popup>
-          </Circle>
-        ))}
+        {/* Conservation site areas from individual JSON files - removed circles per user request */}
         
         {/* New areas added by user (still using circles) */}
         {showAreas && newAreas.map(area => (

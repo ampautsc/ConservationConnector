@@ -34,3 +34,6 @@ dist-ssr
 # Downloaded source data files (large files, not committed)
 public/data/geojson/sources/*.geojson
 public/data/geojson/sources/*.json
+
+# PADUS3 source files (large files used to generate simplified versions)
+public/data/geojson/PADUS3_*.json
