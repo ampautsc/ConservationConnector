@@ -122,11 +122,15 @@ node scripts/create-mo-conservation-polygons.cjs [min-acres] [tolerance]
 
 ### PADUS3 Source Files
 
-The following source files contain the original PADUS 3.0 data for Missouri:
+**Note**: These source files are **NOT included in the repository** due to their large size (20+ MB total). They are only needed if you want to regenerate or modify the `mo-conservation-polygons.geojson` file.
+
+The original PADUS 3.0 data for Missouri includes:
 
 - **PADUS3_0Designation_StateMO.json** (9.5 MB) - State and local conservation/recreation areas
 - **PADUS3_0Easement_StateMO.json** (7.1 MB) - Conservation and agricultural easements
 - **PADUS3_0Proclamation_StateMO.json** (3.9 MB) - National forests, wildlife refuges, and military lands
+
+**How to obtain**: Use the `scripts/fetch-padus-boundaries.cjs` script to download these files from the USGS PADUS database if needed.
 
 These files use ESRI:102039 projection (USA Contiguous Albers Equal Area Conic) and are converted to WGS84 during processing.
 
