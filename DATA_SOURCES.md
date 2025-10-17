@@ -105,6 +105,7 @@ The following designation types still need polygon boundary data:
    - Wyoming (WY)
    - Texas (TX)
    - Arizona (AZ)
+   - Missouri (MO) - already have this
    - Idaho (ID)
    - Colorado (CO)
    - New Mexico (NM)
@@ -124,6 +125,7 @@ The following designation types still need polygon boundary data:
 - Single authoritative source
 - Consistent data quality
 - Includes all designation types
+- Already used for Missouri data
 
 **Script**: `scripts/update-from-padus.cjs` (to be created)
 

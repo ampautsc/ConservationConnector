@@ -105,8 +105,8 @@ export default function ConservationMap() {
 
   // Load GeoJSON data and transform to internal format for heat map calculations
   useEffect(() => {
-    // Load US National Parks
-    fetch('/data/geojson/us-national-parks-polygons.geojson')
+    // Load conservation areas from conservation-areas.json
+    fetch('/data/conservation-areas.json')
       .then(response => {
         // Check if the response is successful (status in the 200-299 range)
         if (!response.ok) {
@@ -118,30 +118,53 @@ export default function ConservationMap() {
         // If successful, proceed to parse as JSON
         return response.json();
       })
-      .then(data => {
-        setGeoJsonData(data);
+      .then(areas => {
+        // Convert to GeoJSON format for rendering
+        const features = areas.filter(area => area.geometry).map(area => ({
+          type: 'Feature',
+          properties: {
+            name: area.name,
+            description: area.description,
+            state: area.state || 'Unknown',
+            established: area.established || 0,
+            area_km2: area.area_km2 || 0
+          },
+          geometry: area.geometry
+        }));
         
-        // Transform GeoJSON features to internal format for heat map calculations
-        // Calculate centroids for polygon geometries
-        const transformedAreas = data.features.map((feature, index) => {
-          const centroid = calculateCentroid(feature.geometry);
+        setGeoJsonData({
+          type: 'FeatureCollection',
+          features: features
+        });
+        
+        // Transform to internal format for heat map calculations
+        // For areas with geometry, calculate centroids; otherwise use lat/lng
+        const transformedAreas = areas.map((area, index) => {
+          let lat, lng;
+          if (area.geometry) {
+            const centroid = calculateCentroid(area.geometry);
+            lat = centroid.lat;
+            lng = centroid.lng;
+          } else {
+            lat = area.lat;
+            lng = area.lng;
+          }
+          
           return {
-            id: `park-${index}`,
-            name: feature.properties.name,
-            lat: centroid.lat,
-            lng: centroid.lng,
-            // Approximate radius based on area: using square root to convert area to radius-like value,
-            // then scaling by 500 to get a reasonable visual representation in meters
-            radius: Math.sqrt(feature.properties.area_km2 || 100) * 500,
-            description: feature.properties.description || feature.properties.name,
-            state: feature.properties.state || 'Unknown',
-            established: feature.properties.established || 0,
-            area_km2: feature.properties.area_km2 || 0
+            id: area.id || `area-${index}`,
+            name: area.name,
+            lat: lat,
+            lng: lng,
+            radius: area.radius || Math.sqrt(area.area_km2 || 100) * 500,
+            description: area.description,
+            state: area.state || 'Unknown',
+            established: area.established || 0,
+            area_km2: area.area_km2 || 0
           };
         });
         setConservationAreas(transformedAreas);
       })
-      .catch(err => console.error('Error loading US National Parks GeoJSON data:', err));
+      .catch(err => console.error('Error loading conservation areas data:', err));
 
     // Load individual conservation site files
     // List of all site files to load
@@ -332,7 +355,7 @@ export default function ConservationMap() {
               checked={showAreas} 
               onChange={(e) => setShowAreas(e.target.checked)}
             />
-            Show US National Parks
+            Show Conservation Areas
           </label>
           <label>
             <input 
@@ -442,7 +465,7 @@ export default function ConservationMap() {
             <h4>Areas</h4>
             <div className="legend-item">
               <span className="legend-circle existing"></span>
-              <span>US National Parks</span>
+              <span>Conservation Areas (from conservation-areas.json)</span>
             </div>
             <div className="legend-item">
               <span className="legend-circle" style={{background: CONSERVATION_SITE_COLORS.fill, border: `2px solid ${CONSERVATION_SITE_COLORS.stroke}`}}></span>
@@ -458,7 +481,7 @@ export default function ConservationMap() {
         <div className="tool-section stats">
           <h3>Statistics</h3>
           <p>Total Areas: {allAreas.length}</p>
-          <p>US National Parks: {conservationAreas.length}</p>
+          <p>Conservation Areas: {conservationAreas.length}</p>
           <p>Conservation Sites: {siteAreas.length}</p>
           <p>New: {newAreas.length}</p>
           <p>Connections: {heatMapLines.length}</p>
@@ -498,10 +521,10 @@ export default function ConservationMap() {
           </Polyline>
         ))}
         
-        {/* Conservation areas from GeoJSON - now showing actual shapes */}
+        {/* Conservation areas from conservation-areas.json - showing actual polygon shapes */}
         {showAreas && geoJsonData && (
           <GeoJSON 
-            key="us-national-parks"
+            key="conservation-areas"
             data={geoJsonData}
             style={() => ({
               fillColor: '#3388ff',
