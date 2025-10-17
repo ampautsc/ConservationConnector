@@ -1,0 +1,28 @@
+{
+  "id": "big-cypress-national-preserve",
+  "name": "Big Cypress National Preserve",
+  "description": "National Preserve in FL",
+  "location": {
+    "lat": 25.9739,
+    "lng": -81.0811,
+    "state": "FL"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -81.0811,
+      25.9739
+    ]
+  },
+  "area": {
+    "acres": 729000,
+    "km2": 2950.16,
+    "hectares": 295016.09
+  },
+  "designation": "National Preserve",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "coconino-nf",
+  "name": "Coconino National Forest",
+  "description": "National Forest in AZ",
+  "location": {
+    "lat": 35,
+    "lng": -111.5,
+    "state": "AZ"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -111.5,
+      35
+    ]
+  },
+  "area": {
+    "acres": 1856000,
+    "km2": 7510.97,
+    "hectares": 751097.22
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

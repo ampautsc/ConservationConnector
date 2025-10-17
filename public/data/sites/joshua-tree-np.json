@@ -1,0 +1,28 @@
+{
+  "id": "joshua-tree-np",
+  "name": "Joshua Tree National Park",
+  "description": "National Park in CA",
+  "location": {
+    "lat": 33.8734,
+    "lng": -115.901,
+    "state": "CA"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -115.901,
+      33.8734
+    ]
+  },
+  "area": {
+    "acres": 795156,
+    "km2": 3217.89,
+    "hectares": 321788.5
+  },
+  "designation": "National Park",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

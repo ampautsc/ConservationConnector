@@ -1,0 +1,28 @@
+{
+  "id": "medicine-bow-routt-nf",
+  "name": "Medicine Bow-Routt National Forest",
+  "description": "National Forest in WY,CO",
+  "location": {
+    "lat": 41,
+    "lng": -106.5,
+    "state": "WY,CO"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -106.5,
+      41
+    ]
+  },
+  "area": {
+    "acres": 2900000,
+    "km2": 11735.89,
+    "hectares": 1173589.4
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

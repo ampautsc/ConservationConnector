@@ -1,0 +1,28 @@
+{
+  "id": "grand-canyon-np",
+  "name": "Grand Canyon National Park",
+  "description": "National Park in AZ",
+  "location": {
+    "lat": 36.0544,
+    "lng": -112.1401,
+    "state": "AZ"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -112.1401,
+      36.0544
+    ]
+  },
+  "area": {
+    "acres": 1201647,
+    "km2": 4862.9,
+    "hectares": 486289.72
+  },
+  "designation": "National Park",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

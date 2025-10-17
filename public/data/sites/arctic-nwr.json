@@ -1,0 +1,28 @@
+{
+  "id": "arctic-nwr",
+  "name": "Arctic National Wildlife Refuge",
+  "description": "National Wildlife Refuge in AK",
+  "location": {
+    "lat": 68.5833,
+    "lng": -145,
+    "state": "AK"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -145,
+      68.5833
+    ]
+  },
+  "area": {
+    "acres": 19286722,
+    "km2": 78050.66,
+    "hectares": 7805066.38
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

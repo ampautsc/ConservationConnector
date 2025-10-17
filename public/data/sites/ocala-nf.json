@@ -1,0 +1,28 @@
+{
+  "id": "ocala-nf",
+  "name": "Ocala National Forest",
+  "description": "National Forest in FL",
+  "location": {
+    "lat": 29.1833,
+    "lng": -81.8,
+    "state": "FL"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -81.8,
+      29.1833
+    ]
+  },
+  "area": {
+    "acres": 607000,
+    "km2": 2456.44,
+    "hectares": 245644.4
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "kaibab-nf",
+  "name": "Kaibab National Forest",
+  "description": "National Forest in AZ",
+  "location": {
+    "lat": 36.25,
+    "lng": -112.25,
+    "state": "AZ"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -112.25,
+      36.25
+    ]
+  },
+  "area": {
+    "acres": 1600000,
+    "km2": 6474.98,
+    "hectares": 647497.6
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

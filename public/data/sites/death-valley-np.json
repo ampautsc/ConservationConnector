@@ -1,0 +1,28 @@
+{
+  "id": "death-valley-np",
+  "name": "Death Valley National Park",
+  "description": "National Park in CA,NV",
+  "location": {
+    "lat": 36.5323,
+    "lng": -116.9325,
+    "state": "CA,NV"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -116.9325,
+      36.5323
+    ]
+  },
+  "area": {
+    "acres": 3408395,
+    "km2": 13793.3,
+    "hectares": 1379329.74
+  },
+  "designation": "National Park",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "ozark-nsr",
+  "name": "Ozark National Scenic Riverways",
+  "description": "National Scenic Riverways in MO",
+  "location": {
+    "lat": 37.1333,
+    "lng": -91.1667,
+    "state": "MO"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -91.1667,
+      37.1333
+    ]
+  },
+  "area": {
+    "acres": 82332,
+    "km2": 333.19,
+    "hectares": 33318.61
+  },
+  "designation": "National Scenic Riverways",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

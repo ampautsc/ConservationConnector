@@ -1,0 +1,28 @@
+{
+  "id": "lake-clark-np",
+  "name": "Lake Clark National Park and Preserve",
+  "description": "National Park and Preserve in AK",
+  "location": {
+    "lat": 60.9672,
+    "lng": -153.4358,
+    "state": "AK"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -153.4358,
+      60.9672
+    ]
+  },
+  "area": {
+    "acres": 4030015,
+    "km2": 16308.91,
+    "hectares": 1630890.65
+  },
+  "designation": "National Park and Preserve",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

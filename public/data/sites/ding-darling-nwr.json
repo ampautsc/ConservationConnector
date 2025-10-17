@@ -1,0 +1,28 @@
+{
+  "id": "ding-darling-nwr",
+  "name": "J.N. \"Ding\" Darling National Wildlife Refuge",
+  "description": "National Wildlife Refuge in FL",
+  "location": {
+    "lat": 26.4418,
+    "lng": -82.1125,
+    "state": "FL"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -82.1125,
+      26.4418
+    ]
+  },
+  "area": {
+    "acres": 6400,
+    "km2": 25.9,
+    "hectares": 2589.99
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

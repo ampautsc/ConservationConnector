@@ -1,0 +1,28 @@
+{
+  "id": "angeles-nf",
+  "name": "Angeles National Forest",
+  "description": "National Forest in CA",
+  "location": {
+    "lat": 34.3705,
+    "lng": -118.0489,
+    "state": "CA"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -118.0489,
+      34.3705
+    ]
+  },
+  "area": {
+    "acres": 700176,
+    "km2": 2833.51,
+    "hectares": 283351.42
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

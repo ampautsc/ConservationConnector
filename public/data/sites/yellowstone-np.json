@@ -1,0 +1,28 @@
+{
+  "id": "yellowstone-np",
+  "name": "Yellowstone National Park",
+  "description": "National Park in WY,MT,ID",
+  "location": {
+    "lat": 44.428,
+    "lng": -110.5885,
+    "state": "WY,MT,ID"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -110.5885,
+      44.428
+    ]
+  },
+  "area": {
+    "acres": 2219791,
+    "km2": 8983.18,
+    "hectares": 898318.34
+  },
+  "designation": "National Park",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

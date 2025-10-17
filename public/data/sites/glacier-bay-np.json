@@ -1,0 +1,28 @@
+{
+  "id": "glacier-bay-np",
+  "name": "Glacier Bay National Park and Preserve",
+  "description": "National Park and Preserve in AK",
+  "location": {
+    "lat": 58.6658,
+    "lng": -136.9003,
+    "state": "AK"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -136.9003,
+      58.6658
+    ]
+  },
+  "area": {
+    "acres": 3223384,
+    "km2": 13044.58,
+    "hectares": 1304458.38
+  },
+  "designation": "National Park and Preserve",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

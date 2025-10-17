@@ -1,0 +1,28 @@
+{
+  "id": "shoshone-nf",
+  "name": "Shoshone National Forest",
+  "description": "National Forest in WY",
+  "location": {
+    "lat": 44,
+    "lng": -109.5,
+    "state": "WY"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -109.5,
+      44
+    ]
+  },
+  "area": {
+    "acres": 2433000,
+    "km2": 9846.01,
+    "hectares": 984601.04
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

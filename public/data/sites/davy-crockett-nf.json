@@ -1,0 +1,28 @@
+{
+  "id": "davy-crockett-nf",
+  "name": "Davy Crockett National Forest",
+  "description": "National Forest in TX",
+  "location": {
+    "lat": 31.2667,
+    "lng": -95.2,
+    "state": "TX"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -95.2,
+      31.2667
+    ]
+  },
+  "area": {
+    "acres": 161000,
+    "km2": 651.54,
+    "hectares": 65154.45
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

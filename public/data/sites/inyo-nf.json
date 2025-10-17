@@ -1,0 +1,28 @@
+{
+  "id": "inyo-nf",
+  "name": "Inyo National Forest",
+  "description": "National Forest in CA,NV",
+  "location": {
+    "lat": 37.5833,
+    "lng": -118.75,
+    "state": "CA,NV"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -118.75,
+      37.5833
+    ]
+  },
+  "area": {
+    "acres": 1903381,
+    "km2": 7702.72,
+    "hectares": 770271.64
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

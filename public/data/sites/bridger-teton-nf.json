@@ -1,0 +1,28 @@
+{
+  "id": "bridger-teton-nf",
+  "name": "Bridger-Teton National Forest",
+  "description": "National Forest in WY",
+  "location": {
+    "lat": 43.5,
+    "lng": -110,
+    "state": "WY"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -110,
+      43.5
+    ]
+  },
+  "area": {
+    "acres": 3400000,
+    "km2": 13759.32,
+    "hectares": 1375932.4
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

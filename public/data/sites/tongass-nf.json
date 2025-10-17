@@ -1,0 +1,28 @@
+{
+  "id": "tongass-nf",
+  "name": "Tongass National Forest",
+  "description": "National Forest in AK",
+  "location": {
+    "lat": 57,
+    "lng": -133.5,
+    "state": "AK"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -133.5,
+      57
+    ]
+  },
+  "area": {
+    "acres": 16700000,
+    "km2": 67582.56,
+    "hectares": 6758256.2
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

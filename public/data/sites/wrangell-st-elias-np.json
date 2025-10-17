@@ -1,0 +1,28 @@
+{
+  "id": "wrangell-st-elias-np",
+  "name": "Wrangell-St. Elias National Park and Preserve",
+  "description": "National Park and Preserve in AK",
+  "location": {
+    "lat": 61.7104,
+    "lng": -142.9857,
+    "state": "AK"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -142.9857,
+      61.7104
+    ]
+  },
+  "area": {
+    "acres": 13175799,
+    "km2": 53320.61,
+    "hectares": 5332061.39
+  },
+  "designation": "National Park and Preserve",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

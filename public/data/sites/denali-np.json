@@ -1,0 +1,28 @@
+{
+  "id": "denali-np",
+  "name": "Denali National Park and Preserve",
+  "description": "National Park and Preserve in AK",
+  "location": {
+    "lat": 63.1148,
+    "lng": -151.1926,
+    "state": "AK"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -151.1926,
+      63.1148
+    ]
+  },
+  "area": {
+    "acres": 6045153,
+    "km2": 24463.89,
+    "hectares": 2446388.79
+  },
+  "designation": "National Park and Preserve",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

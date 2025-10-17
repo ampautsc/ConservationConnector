@@ -1,0 +1,28 @@
+{
+  "id": "petrified-forest-np",
+  "name": "Petrified Forest National Park",
+  "description": "National Park in AZ",
+  "location": {
+    "lat": 34.9099,
+    "lng": -109.7817,
+    "state": "AZ"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -109.7817,
+      34.9099
+    ]
+  },
+  "area": {
+    "acres": 221390,
+    "km2": 895.93,
+    "hectares": 89593.43
+  },
+  "designation": "National Park",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

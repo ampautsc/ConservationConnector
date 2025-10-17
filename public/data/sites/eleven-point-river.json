@@ -1,0 +1,28 @@
+{
+  "id": "eleven-point-river",
+  "name": "Eleven Point Wild and Scenic River",
+  "description": "Wild and Scenic River in MO,AR",
+  "location": {
+    "lat": 36.6667,
+    "lng": -91.25,
+    "state": "MO,AR"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -91.25,
+      36.6667
+    ]
+  },
+  "area": {
+    "acres": 15418,
+    "km2": 62.39,
+    "hectares": 6239.45
+  },
+  "designation": "Wild and Scenic River",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

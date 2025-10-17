@@ -1,0 +1,28 @@
+{
+  "id": "guadalupe-mountains-np",
+  "name": "Guadalupe Mountains National Park",
+  "description": "National Park in TX",
+  "location": {
+    "lat": 31.8977,
+    "lng": -104.8608,
+    "state": "TX"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -104.8608,
+      31.8977
+    ]
+  },
+  "area": {
+    "acres": 86367,
+    "km2": 349.52,
+    "hectares": 34951.52
+  },
+  "designation": "National Park",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "big-thicket-national-preserve",
+  "name": "Big Thicket National Preserve",
+  "description": "National Preserve in TX",
+  "location": {
+    "lat": 30.4572,
+    "lng": -94.385,
+    "state": "TX"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -94.385,
+      30.4572
+    ]
+  },
+  "area": {
+    "acres": 113122,
+    "km2": 457.79,
+    "hectares": 45778.89
+  },
+  "designation": "National Preserve",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

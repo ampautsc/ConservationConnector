@@ -1,0 +1,28 @@
+{
+  "id": "aransas-nwr",
+  "name": "Aransas National Wildlife Refuge",
+  "description": "National Wildlife Refuge in TX",
+  "location": {
+    "lat": 28.2333,
+    "lng": -96.8,
+    "state": "TX"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -96.8,
+      28.2333
+    ]
+  },
+  "area": {
+    "acres": 115000,
+    "km2": 465.39,
+    "hectares": 46538.89
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

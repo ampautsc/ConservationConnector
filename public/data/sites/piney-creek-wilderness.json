@@ -1,0 +1,28 @@
+{
+  "id": "piney-creek-wilderness",
+  "name": "Piney Creek Wilderness",
+  "description": "Wilderness Area in MO",
+  "location": {
+    "lat": 37.0833,
+    "lng": -91.55,
+    "state": "MO"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -91.55,
+      37.0833
+    ]
+  },
+  "area": {
+    "acres": 8142,
+    "km2": 32.95,
+    "hectares": 3294.95
+  },
+  "designation": "Wilderness Area",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

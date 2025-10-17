@@ -1,0 +1,28 @@
+{
+  "id": "big-muddy-nwr",
+  "name": "Big Muddy National Fish and Wildlife Refuge",
+  "description": "National Wildlife Refuge in MO",
+  "location": {
+    "lat": 38.8833,
+    "lng": -91.3833,
+    "state": "MO"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -91.3833,
+      38.8833
+    ]
+  },
+  "area": {
+    "acres": 823214,
+    "km2": 3331.43,
+    "hectares": 333143.18
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

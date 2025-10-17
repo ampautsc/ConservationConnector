@@ -1,0 +1,28 @@
+{
+  "id": "lolo-nf",
+  "name": "Lolo National Forest",
+  "description": "National Forest in MT",
+  "location": {
+    "lat": 47,
+    "lng": -114.5,
+    "state": "MT"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -114.5,
+      47
+    ]
+  },
+  "area": {
+    "acres": 2000000,
+    "km2": 8093.72,
+    "hectares": 809372
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

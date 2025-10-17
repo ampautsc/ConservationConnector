@@ -1,0 +1,28 @@
+{
+  "id": "katmai-np",
+  "name": "Katmai National Park and Preserve",
+  "description": "National Park and Preserve in AK",
+  "location": {
+    "lat": 58.5975,
+    "lng": -155.0649,
+    "state": "AK"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -155.0649,
+      58.5975
+    ]
+  },
+  "area": {
+    "acres": 4093077,
+    "km2": 16564.11,
+    "hectares": 1656410.96
+  },
+  "designation": "National Park and Preserve",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

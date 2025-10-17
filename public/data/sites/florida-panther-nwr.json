@@ -1,0 +1,28 @@
+{
+  "id": "florida-panther-nwr",
+  "name": "Florida Panther National Wildlife Refuge",
+  "description": "National Wildlife Refuge in FL",
+  "location": {
+    "lat": 26.0833,
+    "lng": -81.3167,
+    "state": "FL"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -81.3167,
+      26.0833
+    ]
+  },
+  "area": {
+    "acres": 26400,
+    "km2": 106.84,
+    "hectares": 10683.71
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "padre-island-ns",
+  "name": "Padre Island National Seashore",
+  "description": "National Seashore in TX",
+  "location": {
+    "lat": 27.45,
+    "lng": -97.3167,
+    "state": "TX"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -97.3167,
+      27.45
+    ]
+  },
+  "area": {
+    "acres": 130434,
+    "km2": 527.85,
+    "hectares": 52784.81
+  },
+  "designation": "National Seashore",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

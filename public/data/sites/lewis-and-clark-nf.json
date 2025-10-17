@@ -1,0 +1,28 @@
+{
+  "id": "lewis-and-clark-nf",
+  "name": "Lewis and Clark National Forest",
+  "description": "National Forest in MT",
+  "location": {
+    "lat": 47.5,
+    "lng": -112.5,
+    "state": "MT"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -112.5,
+      47.5
+    ]
+  },
+  "area": {
+    "acres": 1843000,
+    "km2": 7458.36,
+    "hectares": 745836.3
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

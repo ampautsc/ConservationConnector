@@ -1,0 +1,28 @@
+{
+  "id": "middle-mississippi-river-nwr",
+  "name": "Middle Mississippi River National Wildlife Refuge",
+  "description": "National Wildlife Refuge in MO,IL",
+  "location": {
+    "lat": 39.75,
+    "lng": -91,
+    "state": "MO,IL"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -91,
+      39.75
+    ]
+  },
+  "area": {
+    "acres": 12465,
+    "km2": 50.44,
+    "hectares": 5044.41
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "buenos-aires-nwr",
+  "name": "Buenos Aires National Wildlife Refuge",
+  "description": "National Wildlife Refuge in AZ",
+  "location": {
+    "lat": 31.65,
+    "lng": -111.5,
+    "state": "AZ"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -111.5,
+      31.65
+    ]
+  },
+  "area": {
+    "acres": 117464,
+    "km2": 475.36,
+    "hectares": 47536.04
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

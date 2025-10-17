@@ -1,0 +1,28 @@
+{
+  "id": "caribou-targhee-nf",
+  "name": "Caribou-Targhee National Forest",
+  "description": "National Forest in ID,WY",
+  "location": {
+    "lat": 44,
+    "lng": -111,
+    "state": "ID,WY"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -111,
+      44
+    ]
+  },
+  "area": {
+    "acres": 3000000,
+    "km2": 12140.58,
+    "hectares": 1214058
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "hercules-glades-wilderness",
+  "name": "Hercules Glades Wilderness",
+  "description": "Wilderness Area in MO",
+  "location": {
+    "lat": 36.75,
+    "lng": -92.6667,
+    "state": "MO"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -92.6667,
+      36.75
+    ]
+  },
+  "area": {
+    "acres": 12425,
+    "km2": 50.28,
+    "hectares": 5028.22
+  },
+  "designation": "Wilderness Area",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

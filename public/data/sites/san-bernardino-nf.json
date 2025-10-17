@@ -1,0 +1,28 @@
+{
+  "id": "san-bernardino-nf",
+  "name": "San Bernardino National Forest",
+  "description": "National Forest in CA",
+  "location": {
+    "lat": 34.1805,
+    "lng": -116.91,
+    "state": "CA"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -116.91,
+      34.1805
+    ]
+  },
+  "area": {
+    "acres": 823816,
+    "km2": 3333.87,
+    "hectares": 333386.8
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

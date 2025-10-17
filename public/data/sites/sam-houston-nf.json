@@ -1,0 +1,28 @@
+{
+  "id": "sam-houston-nf",
+  "name": "Sam Houston National Forest",
+  "description": "National Forest in TX",
+  "location": {
+    "lat": 30.5333,
+    "lng": -95.3,
+    "state": "TX"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -95.3,
+      30.5333
+    ]
+  },
+  "area": {
+    "acres": 163000,
+    "km2": 659.64,
+    "hectares": 65963.82
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

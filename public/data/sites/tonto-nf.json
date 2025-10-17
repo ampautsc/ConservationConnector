@@ -1,0 +1,28 @@
+{
+  "id": "tonto-nf",
+  "name": "Tonto National Forest",
+  "description": "National Forest in AZ",
+  "location": {
+    "lat": 33.8333,
+    "lng": -111.25,
+    "state": "AZ"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -111.25,
+      33.8333
+    ]
+  },
+  "area": {
+    "acres": 2873000,
+    "km2": 11626.63,
+    "hectares": 1162662.88
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

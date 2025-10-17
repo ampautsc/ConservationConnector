@@ -1,0 +1,28 @@
+{
+  "id": "saguaro-np",
+  "name": "Saguaro National Park",
+  "description": "National Park in AZ",
+  "location": {
+    "lat": 32.25,
+    "lng": -110.75,
+    "state": "AZ"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -110.75,
+      32.25
+    ]
+  },
+  "area": {
+    "acres": 91716,
+    "km2": 371.16,
+    "hectares": 37116.18
+  },
+  "designation": "National Park",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}
