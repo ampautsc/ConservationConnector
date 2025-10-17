@@ -114,7 +114,7 @@ Comprehensive conservation site data is managed through:
 - **Site Files**: `public/data/sites/*.json` - Individual JSON files for each site (auto-generated)
 - **Crawler**: Automated GitHub Action that generates site files from the inventory
 
-See [CONSERVATION_SITE_CRAWLER.md](CONSERVATION_SITE_CRAWLER.md) for details on the conservation site data system.
+See [CONSERVATION_SITE_CRAWLER.md](./CONSERVATION_SITE_CRAWLER.md) for details on the conservation site data system.
 
 ## Technologies
 
