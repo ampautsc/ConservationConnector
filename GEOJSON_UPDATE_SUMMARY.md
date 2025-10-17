@@ -13,9 +13,15 @@ All conservation site files were added with Point geometry (center coordinates o
 
 **Status**: 10 Missouri conservation sites updated with accurate polygon boundaries from existing PADUS data
 
-**Approach**:
+**National Parks Approach**:
 - Extracted polygon data from existing `us-national-parks-polygons.geojson` file
 - Matched parks by name and updated geometry from Point to Polygon/MultiPolygon
+- Updated metadata with data quality = "high" and source attribution
+
+**Missouri Sites Approach**:
+- Extracted polygon data from existing `mo-conservation-polygons.geojson` file (PADUS 3.0)
+- Matched sites by name, supporting multiple feature matches for complex areas
+- Combined multiple features into MultiPolygon where applicable
 - Updated metadata with data quality = "high" and source attribution
 
 **Parks Updated**:
