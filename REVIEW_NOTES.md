@@ -2,13 +2,19 @@
 
 ## What Was Accomplished
 
-### ✅ Completed (19 of 79 sites)
+### ✅ Completed (29 of 79 sites - 37%)
 
-**National Parks with Accurate Polygon Boundaries**:
+**National Parks with Accurate Polygon Boundaries** (19 sites):
 - Updated 19 National Park sites with accurate polygon/multipolygon boundaries
 - Data sourced from existing `us-national-parks-polygons.geojson` file
 - All updated sites now have `dataQuality: "high"` metadata
 - Build and lint tests pass successfully
+
+**Missouri Conservation Sites with Accurate Polygon Boundaries** (10 sites):
+- Updated 10 Missouri conservation sites with polygon boundaries
+- Data sourced from existing `mo-conservation-polygons.geojson` file (PADUS 3.0)
+- Includes National Forest, Wildlife Refuges, Wilderness Areas, and Scenic Rivers
+- All updated with `dataQuality: "high"` metadata
 
 **Example Update**:
 ```diff
@@ -25,7 +31,7 @@
 }
 ```
 
-### 📋 Infrastructure Ready (60 sites pending)
+### 📋 Infrastructure Ready (50 sites pending)
 
 **Scripts Created**:
 1. `scripts/update-site-geometries.cjs` - Updates sites from polygon data
@@ -44,7 +50,7 @@
 
 Due to network restrictions in the build environment, the following files need to be manually downloaded and processed:
 
-#### 1. National Forest Boundaries (32 sites)
+#### 1. National Forest Boundaries (31 sites remaining)
 ```bash
 # Download (requires external network access)
 wget https://data.fs.usda.gov/geodata/edw/edw_resources/fc/S_USA.AdministrativeForest.zip
@@ -60,7 +66,7 @@ mv national-forests.geojson public/data/geojson/sources/
 node scripts/extract-boundaries-from-sources.cjs
 ```
 
-#### 2. Wildlife Refuge Boundaries (18 sites)
+#### 2. Wildlife Refuge Boundaries (11 sites remaining)
 ```bash
 # Download from USFWS
 # URL: https://www.fws.gov/dataset/national-wildlife-refuge-boundaries
@@ -204,7 +210,11 @@ If data acquisition should be separate:
 
 ## Summary
 
-**Progress**: 24% complete (19 of 79 sites)
+**Progress**: 37% complete (29 of 79 sites)
+- ✅ 19 National Parks (from existing data)
+- ✅ 10 Missouri sites (from existing PADUS data)
+- ⏳ 50 sites remaining (need external data)
+
 **Blocker**: Need external data downloads (cannot access from build environment)
 **Solution Ready**: Scripts and documentation prepared for immediate processing
 **Estimated Time**: 30 minutes to complete once data is available

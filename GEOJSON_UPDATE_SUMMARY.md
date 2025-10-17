@@ -9,6 +9,10 @@ All conservation site files were added with Point geometry (center coordinates o
 
 **Status**: 19 National Parks updated with accurate polygon boundaries
 
+### Phase 1.5: Missouri Sites (✅ Completed)
+
+**Status**: 10 Missouri conservation sites updated with accurate polygon boundaries from existing PADUS data
+
 **Approach**:
 - Extracted polygon data from existing `us-national-parks-polygons.geojson` file
 - Matched parks by name and updated geometry from Point to Polygon/MultiPolygon
@@ -37,14 +41,29 @@ All conservation site files were added with Point geometry (center coordinates o
 
 **Script**: `scripts/update-site-geometries.cjs`
 
+**Missouri Sites Updated**:
+1. Mark Twain National Forest
+2. Big Muddy National Fish and Wildlife Refuge
+3. Ozark National Scenic Riverways
+4. Mingo National Wildlife Refuge
+5. Irish Wilderness
+6. Hercules Glades Wilderness
+7. Piney Creek Wilderness
+8. Swan Lake National Wildlife Refuge (Loess Bluffs)
+9. Eleven Point Wild and Scenic River
+10. Middle Mississippi River National Wildlife Refuge
+
+**Script**: `scripts/update-missouri-from-polygons.cjs`
+**Data Source**: Existing `mo-conservation-polygons.geojson` file (from PADUS 3.0)
+
 ### Phase 2: Remaining Sites (⏳ Pending Data)
 
-**Status**: 60 sites identified and documented, awaiting boundary data
+**Status**: 50 sites identified and documented, awaiting boundary data
 
 **Breakdown**:
-- 32 National Forests (USFS data needed)
-- 18 National Wildlife Refuges (USFWS data needed)
-- 10 Other designations (NPS/PADUS data needed)
+- 31 National Forests (USFS data needed) - 1 completed (Mark Twain NF)
+- 11 National Wildlife Refuges (USFWS data needed) - 7 completed (Missouri refuges)
+- 8 Other designations (NPS/PADUS data needed) - 2 completed (Missouri sites)
 
 **Data Sources Required**:
 
@@ -246,8 +265,11 @@ This reduces coordinate points while maintaining visual accuracy.
 
 ## Conclusion
 
-**Completed**: 24% (19 of 79 sites) with accurate boundaries
-**Ready for**: 76% (60 of 79 sites) once data is downloaded
+**Completed**: 37% (29 of 79 sites) with accurate boundaries
+- 19 National Parks
+- 10 Missouri conservation sites
+
+**Ready for**: 63% (50 of 79 sites) once data is downloaded
 **Blocker**: Need to download boundary data from USFS/USFWS or PADUS
 
 The infrastructure is in place to quickly complete the remaining updates once boundary data is obtained.
