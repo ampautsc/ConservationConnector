@@ -30,3 +30,7 @@ dist-ssr
 
 # Backup files
 *.original
+
+# Downloaded source data files (large files, not committed)
+public/data/geojson/sources/*.geojson
+public/data/geojson/sources/*.json
