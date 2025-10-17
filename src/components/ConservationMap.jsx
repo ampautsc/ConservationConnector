@@ -57,17 +57,24 @@ function calculateDistance(lat1, lng1, lat2, lng2) {
   return R * c;
 }
 
+// Constants for geographic calculations
+const KM_PER_DEGREE_LAT = 111.32; // Approximate kilometers per degree of latitude
+
 // Create a circular polygon from a point and area (in km²)
 // This is used to visualize conservation sites with only Point geometry as approximate polygons
 function createCircularPolygon(lat, lng, areaKm2, numPoints = 32) {
   // Calculate radius from area: area = π * r²
   const radiusKm = Math.sqrt(areaKm2 / Math.PI);
-  const radiusDegrees = radiusKm / 111.32; // Approximate km to degrees conversion
+  const radiusDegrees = radiusKm / KM_PER_DEGREE_LAT;
+  
+  // Pre-calculate latitude in radians for performance
+  const latRadians = lat * Math.PI / 180;
+  const cosLat = Math.cos(latRadians);
   
   const coordinates = [];
   for (let i = 0; i <= numPoints; i++) {
     const angle = (i * 360 / numPoints) * Math.PI / 180;
-    const dx = radiusDegrees * Math.cos(angle) / Math.cos(lat * Math.PI / 180);
+    const dx = radiusDegrees * Math.cos(angle) / cosLat;
     const dy = radiusDegrees * Math.sin(angle);
     coordinates.push([lng + dx, lat + dy]);
   }
@@ -258,7 +265,8 @@ export default function ConservationMap() {
             let geometry = site.geometry;
             
             // For Point geometry, create a circular polygon based on the site's area
-            if (site.geometry.type === 'Point' && site.area && site.area.km2) {
+            // Only create circular polygon if area data is valid (positive value)
+            if (site.geometry.type === 'Point' && site.area && site.area.km2 && site.area.km2 > 0) {
               geometry = createCircularPolygon(
                 site.location.lat,
                 site.location.lng,
