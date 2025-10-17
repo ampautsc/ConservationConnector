@@ -63,6 +63,12 @@ function calculateGap(area1, area2) {
   return Math.max(0, centerDistance - area1.radius - area2.radius);
 }
 
+// Color constants for conservation areas
+const CONSERVATION_SITE_COLORS = {
+  fill: '#ff8833',
+  stroke: '#cc6622'
+};
+
 // Get color for heat map based on gap distance
 // Colors are assigned based on specific distance thresholds:
 // 0-25 miles: green
@@ -93,6 +99,12 @@ export default function ConservationMap() {
   const [showHeatMap, setShowHeatMap] = useState(true);
   const [showAreas, setShowAreas] = useState(true);
   const [showGradientHeatMap, setShowGradientHeatMap] = useState(false);
+
+  // State for site GeoJSON data
+  const [siteGeoJsonData, setSiteGeoJsonData] = useState(null);
+  
+  // State for Missouri conservation polygons
+  const [moConservationData, setMoConservationData] = useState(null);
 
   // Load GeoJSON data and transform to internal format for heat map calculations
   useEffect(() => {
@@ -133,6 +145,21 @@ export default function ConservationMap() {
         setConservationAreas(transformedAreas);
       })
       .catch(err => console.error('Error loading US National Parks GeoJSON data:', err));
+
+    // Load Missouri conservation polygons
+    fetch('/data/geojson/mo-conservation-polygons.geojson')
+      .then(response => {
+        if (!response.ok) {
+          return response.text().then(text => {
+            throw new Error(`HTTP error! status: ${response.status}, body: ${text}`);
+          });
+        }
+        return response.json();
+      })
+      .then(data => {
+        setMoConservationData(data);
+      })
+      .catch(err => console.error('Error loading Missouri conservation polygons:', err));
 
     // Load individual conservation site files
     // List of all site files to load
@@ -178,23 +205,45 @@ export default function ConservationMap() {
       )
     )
       .then(sites => {
-        // Filter out null values (failed loads) and transform to internal format
-        const transformedSites = sites
-          .filter(site => site !== null)
-          .map(site => ({
-            id: site.id,
-            name: site.name,
-            lat: site.location.lat,
-            lng: site.location.lng,
-            // Calculate radius from area in km2
-            radius: Math.sqrt(site.area.km2 || 100) * 500,
-            description: site.description,
-            state: site.location.state || 'Unknown',
-            designation: site.designation,
-            area_km2: site.area.km2 || 0,
-            isSiteFile: true
-          }));
+        // Filter out null values (failed loads)
+        const validSites = sites.filter(site => site !== null);
+        
+        // Transform to internal format for heat map calculations
+        const transformedSites = validSites.map(site => ({
+          id: site.id,
+          name: site.name,
+          lat: site.location.lat,
+          lng: site.location.lng,
+          // Calculate radius from area in km2
+          radius: Math.sqrt(site.area.km2 || 100) * 500,
+          description: site.description,
+          state: site.location.state || 'Unknown',
+          designation: site.designation,
+          area_km2: site.area.km2 || 0,
+          isSiteFile: true
+        }));
         setSiteAreas(transformedSites);
+        
+        // Create GeoJSON FeatureCollection from site data for polygon rendering
+        // Only include sites with Polygon or MultiPolygon geometry (exclude Point geometry)
+        const siteFeatures = validSites
+          .filter(site => site.geometry && (site.geometry.type === 'Polygon' || site.geometry.type === 'MultiPolygon'))
+          .map(site => ({
+            type: 'Feature',
+            properties: {
+              name: site.name,
+              description: site.description,
+              state: site.location.state || 'Unknown',
+              designation: site.designation,
+              area_km2: site.area.km2 || 0
+            },
+            geometry: site.geometry
+          }));
+        
+        setSiteGeoJsonData({
+          type: 'FeatureCollection',
+          features: siteFeatures
+        });
       })
       .catch(err => console.error('Error loading conservation sites:', err));
   }, []);
@@ -414,6 +463,10 @@ export default function ConservationMap() {
               <span>US National Parks</span>
             </div>
             <div className="legend-item">
+              <span className="legend-circle" style={{background: CONSERVATION_SITE_COLORS.fill, border: `2px solid ${CONSERVATION_SITE_COLORS.stroke}`}}></span>
+              <span>Conservation Sites (NF, NWR, etc.)</span>
+            </div>
+            <div className="legend-item">
               <span className="legend-circle new"></span>
               <span>New Areas</span>
             </div>
@@ -466,6 +519,7 @@ export default function ConservationMap() {
         {/* Conservation areas from GeoJSON - now showing actual shapes */}
         {showAreas && geoJsonData && (
           <GeoJSON 
+            key="us-national-parks"
             data={geoJsonData}
             style={() => ({
               fillColor: '#3388ff',
@@ -491,7 +545,63 @@ export default function ConservationMap() {
           />
         )}
         
-        {/* Conservation site areas from individual JSON files - removed circles per user request */}
+        {/* Missouri conservation areas - polygons from PADUS data */}
+        {showAreas && moConservationData && (
+          <GeoJSON 
+            key="mo-conservation-areas"
+            data={moConservationData}
+            style={() => ({
+              fillColor: CONSERVATION_SITE_COLORS.fill,
+              color: CONSERVATION_SITE_COLORS.stroke,
+              weight: 2,
+              opacity: 0.8,
+              fillOpacity: 0.4
+            })}
+            onEachFeature={(feature, layer) => {
+              // Bind popup to each feature
+              if (feature.properties) {
+                const props = feature.properties;
+                const popupContent = `
+                  <strong>${props.name}</strong><br />
+                  ${props.state}<br />
+                  ${props.designation ? `Designation: ${props.designation}<br />` : ''}
+                  ${props.acres ? `Area: ${Math.round(props.acres).toLocaleString()} acres<br />` : ''}
+                  ${props.manager ? `Manager: ${props.manager}<br />` : ''}
+                `;
+                layer.bindPopup(popupContent);
+              }
+            }}
+          />
+        )}
+        
+        {/* Conservation site areas from individual JSON files - only polygons, not points */}
+        {showAreas && siteGeoJsonData && (
+          <GeoJSON 
+            key="site-conservation-areas"
+            data={siteGeoJsonData}
+            style={() => ({
+              fillColor: CONSERVATION_SITE_COLORS.fill,
+              color: CONSERVATION_SITE_COLORS.stroke,
+              weight: 2,
+              opacity: 0.8,
+              fillOpacity: 0.4
+            })}
+            onEachFeature={(feature, layer) => {
+              // Bind popup to each feature
+              if (feature.properties) {
+                const props = feature.properties;
+                const popupContent = `
+                  <strong>${props.name}</strong><br />
+                  ${props.state}<br />
+                  ${props.designation ? `Designation: ${props.designation}<br />` : ''}
+                  ${props.area_km2 ? `Area: ${props.area_km2} km²<br />` : ''}
+                  ${props.description}
+                `;
+                layer.bindPopup(popupContent);
+              }
+            }}
+          />
+        )}
         
         {/* New areas added by user (still using circles) */}
         {showAreas && newAreas.map(area => (
