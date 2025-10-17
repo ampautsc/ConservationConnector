@@ -84,6 +84,7 @@ function getHeatMapColor(gap) {
 
 export default function ConservationMap() {
   const [geoJsonData, setGeoJsonData] = useState(null);
+  const [moGeoJsonData, setMoGeoJsonData] = useState(null);
   const [conservationAreas, setConservationAreas] = useState([]);
   const [newAreas, setNewAreas] = useState([]);
   const [isAddingArea, setIsAddingArea] = useState(false);
@@ -91,10 +92,12 @@ export default function ConservationMap() {
   const [newAreaName, setNewAreaName] = useState('');
   const [showHeatMap, setShowHeatMap] = useState(true);
   const [showAreas, setShowAreas] = useState(true);
+  const [showMoAreas, setShowMoAreas] = useState(true);
   const [showGradientHeatMap, setShowGradientHeatMap] = useState(false);
 
   // Load GeoJSON data and transform to internal format for heat map calculations
   useEffect(() => {
+    // Load US National Parks
     fetch('/data/geojson/us-national-parks-polygons.geojson')
       .then(response => {
         // Check if the response is successful (status in the 200-299 range)
@@ -130,7 +133,22 @@ export default function ConservationMap() {
         });
         setConservationAreas(transformedAreas);
       })
-      .catch(err => console.error('Error loading GeoJSON data:', err));
+      .catch(err => console.error('Error loading US National Parks GeoJSON data:', err));
+
+    // Load Missouri Conservation Areas
+    fetch('/data/geojson/mo-conservation-polygons.geojson')
+      .then(response => {
+        if (!response.ok) {
+          return response.text().then(text => {
+            throw new Error(`HTTP error! status: ${response.status}, body: ${text}`);
+          });
+        }
+        return response.json();
+      })
+      .then(data => {
+        setMoGeoJsonData(data);
+      })
+      .catch(err => console.error('Error loading Missouri conservation areas GeoJSON data:', err));
   }, []);
 
   // All areas (existing + new)
@@ -235,7 +253,15 @@ export default function ConservationMap() {
               checked={showAreas} 
               onChange={(e) => setShowAreas(e.target.checked)}
             />
-            Show Conservation Areas
+            Show US National Parks
+          </label>
+          <label>
+            <input 
+              type="checkbox" 
+              checked={showMoAreas} 
+              onChange={(e) => setShowMoAreas(e.target.checked)}
+            />
+            Show Missouri Conservation Areas
           </label>
           <label>
             <input 
@@ -417,6 +443,35 @@ export default function ConservationMap() {
                   ${props.established ? `Established: ${props.established}<br />` : ''}
                   ${props.area_km2 ? `Area: ${props.area_km2} km²<br />` : ''}
                   ${props.description}
+                `;
+                layer.bindPopup(popupContent);
+              }
+            }}
+          />
+        )}
+        
+        {/* Missouri conservation areas from GeoJSON */}
+        {showMoAreas && moGeoJsonData && (
+          <GeoJSON 
+            data={moGeoJsonData}
+            style={() => ({
+              fillColor: '#00cc66',
+              color: '#009944',
+              weight: 2,
+              opacity: 0.8,
+              fillOpacity: 0.4
+            })}
+            onEachFeature={(feature, layer) => {
+              // Bind popup to each feature
+              if (feature.properties) {
+                const props = feature.properties;
+                const popupContent = `
+                  <strong>${props.name}</strong><br />
+                  ${props.state || 'Missouri'}<br />
+                  ${props.designation ? `Type: ${props.designation}<br />` : ''}
+                  ${props.acres ? `Area: ${props.acres.toLocaleString()} acres<br />` : ''}
+                  ${props.manager ? `Manager: ${props.manager}<br />` : ''}
+                  ${props.owner ? `Owner: ${props.owner}` : ''}
                 `;
                 layer.bindPopup(popupContent);
               }
