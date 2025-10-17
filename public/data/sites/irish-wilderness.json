@@ -1,0 +1,28 @@
+{
+  "id": "irish-wilderness",
+  "name": "Irish Wilderness",
+  "description": "Wilderness Area in MO",
+  "location": {
+    "lat": 37.15,
+    "lng": -91.0833,
+    "state": "MO"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -91.0833,
+      37.15
+    ]
+  },
+  "area": {
+    "acres": 16509,
+    "km2": 66.81,
+    "hectares": 6680.96
+  },
+  "designation": "Wilderness Area",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

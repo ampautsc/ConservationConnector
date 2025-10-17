@@ -1,0 +1,28 @@
+{
+  "id": "merritt-island-nwr",
+  "name": "Merritt Island National Wildlife Refuge",
+  "description": "National Wildlife Refuge in FL",
+  "location": {
+    "lat": 28.6333,
+    "lng": -80.7167,
+    "state": "FL"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -80.7167,
+      28.6333
+    ]
+  },
+  "area": {
+    "acres": 140000,
+    "km2": 566.56,
+    "hectares": 56656.04
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

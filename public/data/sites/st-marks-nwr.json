@@ -1,0 +1,28 @@
+{
+  "id": "st-marks-nwr",
+  "name": "St. Marks National Wildlife Refuge",
+  "description": "National Wildlife Refuge in FL",
+  "location": {
+    "lat": 30.0833,
+    "lng": -84.1667,
+    "state": "FL"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -84.1667,
+      30.0833
+    ]
+  },
+  "area": {
+    "acres": 83000,
+    "km2": 335.89,
+    "hectares": 33588.94
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "mojave-national-preserve",
+  "name": "Mojave National Preserve",
+  "description": "National Preserve in CA",
+  "location": {
+    "lat": 35.1411,
+    "lng": -115.5125,
+    "state": "CA"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -115.5125,
+      35.1411
+    ]
+  },
+  "area": {
+    "acres": 1542776,
+    "km2": 6243.4,
+    "hectares": 624339.85
+  },
+  "designation": "National Preserve",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

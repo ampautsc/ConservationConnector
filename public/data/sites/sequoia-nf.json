@@ -1,0 +1,28 @@
+{
+  "id": "sequoia-nf",
+  "name": "Sequoia National Forest",
+  "description": "National Forest in CA",
+  "location": {
+    "lat": 36,
+    "lng": -118.5,
+    "state": "CA"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -118.5,
+      36
+    ]
+  },
+  "area": {
+    "acres": 1193315,
+    "km2": 4829.18,
+    "hectares": 482917.87
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

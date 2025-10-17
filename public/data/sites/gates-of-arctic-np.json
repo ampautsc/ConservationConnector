@@ -1,0 +1,28 @@
+{
+  "id": "gates-of-arctic-np",
+  "name": "Gates of the Arctic National Park and Preserve",
+  "description": "National Park and Preserve in AK",
+  "location": {
+    "lat": 67.7879,
+    "lng": -153.2952,
+    "state": "AK"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -153.2952,
+      67.7879
+    ]
+  },
+  "area": {
+    "acres": 8472506,
+    "km2": 34287.05,
+    "hectares": 3428704.56
+  },
+  "designation": "National Park and Preserve",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "yukon-delta-nwr",
+  "name": "Yukon Delta National Wildlife Refuge",
+  "description": "National Wildlife Refuge in AK",
+  "location": {
+    "lat": 61.3333,
+    "lng": -163,
+    "state": "AK"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -163,
+      61.3333
+    ]
+  },
+  "area": {
+    "acres": 19624458,
+    "km2": 79417.43,
+    "hectares": 7941743.41
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

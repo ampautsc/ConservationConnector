@@ -1,0 +1,28 @@
+{
+  "id": "national-elk-refuge",
+  "name": "National Elk Refuge",
+  "description": "National Wildlife Refuge in WY",
+  "location": {
+    "lat": 43.4833,
+    "lng": -110.7167,
+    "state": "WY"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -110.7167,
+      43.4833
+    ]
+  },
+  "area": {
+    "acres": 24700,
+    "km2": 99.96,
+    "hectares": 9995.74
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "big-bend-np",
+  "name": "Big Bend National Park",
+  "description": "National Park in TX",
+  "location": {
+    "lat": 29.1275,
+    "lng": -103.2428,
+    "state": "TX"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -103.2428,
+      29.1275
+    ]
+  },
+  "area": {
+    "acres": 801163,
+    "km2": 3242.19,
+    "hectares": 324219.45
+  },
+  "designation": "National Park",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

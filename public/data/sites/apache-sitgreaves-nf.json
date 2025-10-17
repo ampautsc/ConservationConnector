@@ -1,0 +1,28 @@
+{
+  "id": "apache-sitgreaves-nf",
+  "name": "Apache-Sitgreaves National Forests",
+  "description": "National Forest in AZ",
+  "location": {
+    "lat": 34.5,
+    "lng": -109.5,
+    "state": "AZ"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -109.5,
+      34.5
+    ]
+  },
+  "area": {
+    "acres": 2000000,
+    "km2": 8093.72,
+    "hectares": 809372
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

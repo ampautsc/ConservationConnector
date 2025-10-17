@@ -1,0 +1,28 @@
+{
+  "id": "helena-lewis-clark-nf",
+  "name": "Helena-Lewis and Clark National Forest",
+  "description": "National Forest in MT",
+  "location": {
+    "lat": 47,
+    "lng": -112,
+    "state": "MT"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -112,
+      47
+    ]
+  },
+  "area": {
+    "acres": 1000000,
+    "km2": 4046.86,
+    "hectares": 404686
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

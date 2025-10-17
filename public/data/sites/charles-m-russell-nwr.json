@@ -1,0 +1,28 @@
+{
+  "id": "charles-m-russell-nwr",
+  "name": "Charles M. Russell National Wildlife Refuge",
+  "description": "National Wildlife Refuge in MT",
+  "location": {
+    "lat": 47.6667,
+    "lng": -108.3333,
+    "state": "MT"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -108.3333,
+      47.6667
+    ]
+  },
+  "area": {
+    "acres": 1100000,
+    "km2": 4451.55,
+    "hectares": 445154.6
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

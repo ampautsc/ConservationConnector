@@ -1,0 +1,28 @@
+{
+  "id": "flaming-gorge-nra",
+  "name": "Flaming Gorge National Recreation Area",
+  "description": "National Recreation Area in WY,UT",
+  "location": {
+    "lat": 40.9189,
+    "lng": -109.4194,
+    "state": "WY,UT"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -109.4194,
+      40.9189
+    ]
+  },
+  "area": {
+    "acres": 207363,
+    "km2": 839.17,
+    "hectares": 83916.9
+  },
+  "designation": "National Recreation Area",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

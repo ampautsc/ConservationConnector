@@ -1,0 +1,28 @@
+{
+  "id": "yosemite-np",
+  "name": "Yosemite National Park",
+  "description": "National Park in CA",
+  "location": {
+    "lat": 37.8651,
+    "lng": -119.5383,
+    "state": "CA"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -119.5383,
+      37.8651
+    ]
+  },
+  "area": {
+    "acres": 761747,
+    "km2": 3082.68,
+    "hectares": 308268.35
+  },
+  "designation": "National Park",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

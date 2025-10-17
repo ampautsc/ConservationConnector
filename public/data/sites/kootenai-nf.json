@@ -1,0 +1,28 @@
+{
+  "id": "kootenai-nf",
+  "name": "Kootenai National Forest",
+  "description": "National Forest in MT,ID",
+  "location": {
+    "lat": 48.5,
+    "lng": -115.5,
+    "state": "MT,ID"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -115.5,
+      48.5
+    ]
+  },
+  "area": {
+    "acres": 2200000,
+    "km2": 8903.09,
+    "hectares": 890309.2
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

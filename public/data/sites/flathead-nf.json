@@ -1,0 +1,28 @@
+{
+  "id": "flathead-nf",
+  "name": "Flathead National Forest",
+  "description": "National Forest in MT",
+  "location": {
+    "lat": 48.25,
+    "lng": -113.75,
+    "state": "MT"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -113.75,
+      48.25
+    ]
+  },
+  "area": {
+    "acres": 2404935,
+    "km2": 9732.44,
+    "hectares": 973243.53
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

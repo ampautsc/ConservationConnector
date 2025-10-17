@@ -1,0 +1,28 @@
+{
+  "id": "mark-twain-nf",
+  "name": "Mark Twain National Forest",
+  "description": "National Forest in MO",
+  "location": {
+    "lat": 37.5,
+    "lng": -91.5,
+    "state": "MO"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -91.5,
+      37.5
+    ]
+  },
+  "area": {
+    "acres": 3044784,
+    "km2": 12321.81,
+    "hectares": 1232181.46
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

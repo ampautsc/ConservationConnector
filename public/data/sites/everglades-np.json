@@ -1,0 +1,28 @@
+{
+  "id": "everglades-np",
+  "name": "Everglades National Park",
+  "description": "National Park in FL",
+  "location": {
+    "lat": 25.2866,
+    "lng": -80.8987,
+    "state": "FL"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -80.8987,
+      25.2866
+    ]
+  },
+  "area": {
+    "acres": 1508976,
+    "km2": 6106.61,
+    "hectares": 610661.46
+  },
+  "designation": "National Park",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

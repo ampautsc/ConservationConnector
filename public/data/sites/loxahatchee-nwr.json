@@ -1,0 +1,28 @@
+{
+  "id": "loxahatchee-nwr",
+  "name": "Arthur R. Marshall Loxahatchee National Wildlife Refuge",
+  "description": "National Wildlife Refuge in FL",
+  "location": {
+    "lat": 26.45,
+    "lng": -80.2833,
+    "state": "FL"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -80.2833,
+      26.45
+    ]
+  },
+  "area": {
+    "acres": 145635,
+    "km2": 589.36,
+    "hectares": 58936.45
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

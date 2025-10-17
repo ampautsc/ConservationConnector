@@ -1,0 +1,28 @@
+{
+  "id": "sierra-nf",
+  "name": "Sierra National Forest",
+  "description": "National Forest in CA",
+  "location": {
+    "lat": 37.2333,
+    "lng": -119.2167,
+    "state": "CA"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -119.2167,
+      37.2333
+    ]
+  },
+  "area": {
+    "acres": 1300000,
+    "km2": 5260.92,
+    "hectares": 526091.8
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

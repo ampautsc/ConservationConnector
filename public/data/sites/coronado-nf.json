@@ -1,0 +1,28 @@
+{
+  "id": "coronado-nf",
+  "name": "Coronado National Forest",
+  "description": "National Forest in AZ,NM",
+  "location": {
+    "lat": 31.8333,
+    "lng": -110.5,
+    "state": "AZ,NM"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -110.5,
+      31.8333
+    ]
+  },
+  "area": {
+    "acres": 1780000,
+    "km2": 7203.41,
+    "hectares": 720341.08
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "chugach-nf",
+  "name": "Chugach National Forest",
+  "description": "National Forest in AK",
+  "location": {
+    "lat": 60.5833,
+    "lng": -147.1667,
+    "state": "AK"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -147.1667,
+      60.5833
+    ]
+  },
+  "area": {
+    "acres": 6908540,
+    "km2": 27957.89,
+    "hectares": 2795789.42
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

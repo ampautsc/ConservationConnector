@@ -1,0 +1,28 @@
+{
+  "id": "apalachicola-nf",
+  "name": "Apalachicola National Forest",
+  "description": "National Forest in FL",
+  "location": {
+    "lat": 30.1667,
+    "lng": -84.5833,
+    "state": "FL"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -84.5833,
+      30.1667
+    ]
+  },
+  "area": {
+    "acres": 632890,
+    "km2": 2561.22,
+    "hectares": 256121.72
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

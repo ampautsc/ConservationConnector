@@ -1,0 +1,28 @@
+{
+  "id": "seedskadee-nwr",
+  "name": "Seedskadee National Wildlife Refuge",
+  "description": "National Wildlife Refuge in WY",
+  "location": {
+    "lat": 41.7667,
+    "lng": -109.8333,
+    "state": "WY"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -109.8333,
+      41.7667
+    ]
+  },
+  "area": {
+    "acres": 27230,
+    "km2": 110.2,
+    "hectares": 11019.6
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

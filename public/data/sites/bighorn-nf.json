@@ -1,0 +1,28 @@
+{
+  "id": "bighorn-nf",
+  "name": "Bighorn National Forest",
+  "description": "National Forest in WY",
+  "location": {
+    "lat": 44.5,
+    "lng": -107.5,
+    "state": "WY"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -107.5,
+      44.5
+    ]
+  },
+  "area": {
+    "acres": 1107000,
+    "km2": 4479.87,
+    "hectares": 447987.4
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

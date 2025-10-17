@@ -1,0 +1,28 @@
+{
+  "id": "custer-gallatin-nf",
+  "name": "Custer Gallatin National Forest",
+  "description": "National Forest in MT,SD",
+  "location": {
+    "lat": 45.5,
+    "lng": -110,
+    "state": "MT,SD"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -110,
+      45.5
+    ]
+  },
+  "area": {
+    "acres": 3000000,
+    "km2": 12140.58,
+    "hectares": 1214058
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

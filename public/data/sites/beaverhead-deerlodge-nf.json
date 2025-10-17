@@ -1,0 +1,28 @@
+{
+  "id": "beaverhead-deerlodge-nf",
+  "name": "Beaverhead-Deerlodge National Forest",
+  "description": "National Forest in MT",
+  "location": {
+    "lat": 45.5,
+    "lng": -113,
+    "state": "MT"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -113,
+      45.5
+    ]
+  },
+  "area": {
+    "acres": 3360000,
+    "km2": 13597.45,
+    "hectares": 1359744.96
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

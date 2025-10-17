@@ -1,0 +1,28 @@
+{
+  "id": "grand-teton-np",
+  "name": "Grand Teton National Park",
+  "description": "National Park in WY",
+  "location": {
+    "lat": 43.7904,
+    "lng": -110.8024,
+    "state": "WY"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -110.8024,
+      43.7904
+    ]
+  },
+  "area": {
+    "acres": 310044,
+    "km2": 1254.7,
+    "hectares": 125470.47
+  },
+  "designation": "National Park",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

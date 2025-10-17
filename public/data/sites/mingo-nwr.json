@@ -1,0 +1,28 @@
+{
+  "id": "mingo-nwr",
+  "name": "Mingo National Wildlife Refuge",
+  "description": "National Wildlife Refuge in MO",
+  "location": {
+    "lat": 36.9667,
+    "lng": -90.1167,
+    "state": "MO"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -90.1167,
+      36.9667
+    ]
+  },
+  "area": {
+    "acres": 21699,
+    "km2": 87.81,
+    "hectares": 8781.28
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

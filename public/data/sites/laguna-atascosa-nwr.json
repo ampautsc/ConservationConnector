@@ -1,0 +1,28 @@
+{
+  "id": "laguna-atascosa-nwr",
+  "name": "Laguna Atascosa National Wildlife Refuge",
+  "description": "National Wildlife Refuge in TX",
+  "location": {
+    "lat": 26.2333,
+    "lng": -97.35,
+    "state": "TX"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -97.35,
+      26.2333
+    ]
+  },
+  "area": {
+    "acres": 97000,
+    "km2": 392.55,
+    "hectares": 39254.54
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

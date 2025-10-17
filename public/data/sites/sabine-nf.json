@@ -1,0 +1,28 @@
+{
+  "id": "sabine-nf",
+  "name": "Sabine National Forest",
+  "description": "National Forest in TX",
+  "location": {
+    "lat": 31.3167,
+    "lng": -93.85,
+    "state": "TX"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -93.85,
+      31.3167
+    ]
+  },
+  "area": {
+    "acres": 160000,
+    "km2": 647.5,
+    "hectares": 64749.76
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

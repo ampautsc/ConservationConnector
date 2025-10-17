@@ -1,0 +1,28 @@
+{
+  "id": "glacier-np",
+  "name": "Glacier National Park",
+  "description": "National Park in MT",
+  "location": {
+    "lat": 48.7596,
+    "lng": -113.787,
+    "state": "MT"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -113.787,
+      48.7596
+    ]
+  },
+  "area": {
+    "acres": 1013125,
+    "km2": 4099.98,
+    "hectares": 409997.5
+  },
+  "designation": "National Park",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

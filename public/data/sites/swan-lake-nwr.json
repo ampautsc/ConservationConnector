@@ -1,0 +1,28 @@
+{
+  "id": "swan-lake-nwr",
+  "name": "Swan Lake National Wildlife Refuge",
+  "description": "National Wildlife Refuge in MO",
+  "location": {
+    "lat": 39.6833,
+    "lng": -93.2667,
+    "state": "MO"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -93.2667,
+      39.6833
+    ]
+  },
+  "area": {
+    "acres": 10795,
+    "km2": 43.69,
+    "hectares": 4368.59
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

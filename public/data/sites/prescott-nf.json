@@ -1,0 +1,28 @@
+{
+  "id": "prescott-nf",
+  "name": "Prescott National Forest",
+  "description": "National Forest in AZ",
+  "location": {
+    "lat": 34.5,
+    "lng": -112.5,
+    "state": "AZ"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -112.5,
+      34.5
+    ]
+  },
+  "area": {
+    "acres": 1237062,
+    "km2": 5006.22,
+    "hectares": 500621.67
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

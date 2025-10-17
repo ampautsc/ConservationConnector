@@ -1,0 +1,28 @@
+{
+  "id": "ten-thousand-islands-nwr",
+  "name": "Ten Thousand Islands National Wildlife Refuge",
+  "description": "National Wildlife Refuge in FL",
+  "location": {
+    "lat": 25.8333,
+    "lng": -81.4,
+    "state": "FL"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -81.4,
+      25.8333
+    ]
+  },
+  "area": {
+    "acres": 35000,
+    "km2": 141.64,
+    "hectares": 14164.01
+  },
+  "designation": "National Wildlife Refuge",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

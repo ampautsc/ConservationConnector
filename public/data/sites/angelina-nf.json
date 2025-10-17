@@ -1,0 +1,28 @@
+{
+  "id": "angelina-nf",
+  "name": "Angelina National Forest",
+  "description": "National Forest in TX",
+  "location": {
+    "lat": 31.2833,
+    "lng": -94.5833,
+    "state": "TX"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -94.5833,
+      31.2833
+    ]
+  },
+  "area": {
+    "acres": 153000,
+    "km2": 619.17,
+    "hectares": 61916.96
+  },
+  "designation": "National Forest",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}

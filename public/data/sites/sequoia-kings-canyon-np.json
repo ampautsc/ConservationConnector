@@ -1,0 +1,28 @@
+{
+  "id": "sequoia-kings-canyon-np",
+  "name": "Sequoia and Kings Canyon National Parks",
+  "description": "National Park in CA",
+  "location": {
+    "lat": 36.4864,
+    "lng": -118.5658,
+    "state": "CA"
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      -118.5658,
+      36.4864
+    ]
+  },
+  "area": {
+    "acres": 865964,
+    "km2": 3504.44,
+    "hectares": 350443.51
+  },
+  "designation": "National Park",
+  "metadata": {
+    "source": "Conservation Connector Site Inventory",
+    "lastUpdated": "2025-10-17",
+    "dataQuality": "medium"
+  }
+}
