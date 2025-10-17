@@ -94,6 +94,9 @@ export default function ConservationMap() {
   const [showAreas, setShowAreas] = useState(true);
   const [showGradientHeatMap, setShowGradientHeatMap] = useState(false);
 
+  // State for site GeoJSON data
+  const [siteGeoJsonData, setSiteGeoJsonData] = useState(null);
+
   // Load GeoJSON data and transform to internal format for heat map calculations
   useEffect(() => {
     // Load US National Parks
@@ -178,23 +181,44 @@ export default function ConservationMap() {
       )
     )
       .then(sites => {
-        // Filter out null values (failed loads) and transform to internal format
-        const transformedSites = sites
-          .filter(site => site !== null)
-          .map(site => ({
-            id: site.id,
-            name: site.name,
-            lat: site.location.lat,
-            lng: site.location.lng,
-            // Calculate radius from area in km2
-            radius: Math.sqrt(site.area.km2 || 100) * 500,
-            description: site.description,
-            state: site.location.state || 'Unknown',
-            designation: site.designation,
-            area_km2: site.area.km2 || 0,
-            isSiteFile: true
-          }));
+        // Filter out null values (failed loads)
+        const validSites = sites.filter(site => site !== null);
+        
+        // Transform to internal format for heat map calculations
+        const transformedSites = validSites.map(site => ({
+          id: site.id,
+          name: site.name,
+          lat: site.location.lat,
+          lng: site.location.lng,
+          // Calculate radius from area in km2
+          radius: Math.sqrt(site.area.km2 || 100) * 500,
+          description: site.description,
+          state: site.location.state || 'Unknown',
+          designation: site.designation,
+          area_km2: site.area.km2 || 0,
+          isSiteFile: true
+        }));
         setSiteAreas(transformedSites);
+        
+        // Create GeoJSON FeatureCollection from site data for polygon rendering
+        const siteFeatures = validSites
+          .filter(site => site.geometry) // Only include sites with geometry
+          .map(site => ({
+            type: 'Feature',
+            properties: {
+              name: site.name,
+              description: site.description,
+              state: site.location.state || 'Unknown',
+              designation: site.designation,
+              area_km2: site.area.km2 || 0
+            },
+            geometry: site.geometry
+          }));
+        
+        setSiteGeoJsonData({
+          type: 'FeatureCollection',
+          features: siteFeatures
+        });
       })
       .catch(err => console.error('Error loading conservation sites:', err));
   }, []);
@@ -414,6 +438,10 @@ export default function ConservationMap() {
               <span>US National Parks</span>
             </div>
             <div className="legend-item">
+              <span className="legend-circle" style={{background: '#ff8833', border: '2px solid #cc6622'}}></span>
+              <span>Conservation Sites (NF, NWR, etc.)</span>
+            </div>
+            <div className="legend-item">
               <span className="legend-circle new"></span>
               <span>New Areas</span>
             </div>
@@ -491,7 +519,33 @@ export default function ConservationMap() {
           />
         )}
         
-        {/* Conservation site areas from individual JSON files - removed circles per user request */}
+        {/* Conservation site areas from individual JSON files - now showing polygons */}
+        {showAreas && siteGeoJsonData && (
+          <GeoJSON 
+            data={siteGeoJsonData}
+            style={() => ({
+              fillColor: '#ff8833',
+              color: '#cc6622',
+              weight: 2,
+              opacity: 0.8,
+              fillOpacity: 0.4
+            })}
+            onEachFeature={(feature, layer) => {
+              // Bind popup to each feature
+              if (feature.properties) {
+                const props = feature.properties;
+                const popupContent = `
+                  <strong>${props.name}</strong><br />
+                  ${props.state}<br />
+                  ${props.designation ? `Designation: ${props.designation}<br />` : ''}
+                  ${props.area_km2 ? `Area: ${props.area_km2} km²<br />` : ''}
+                  ${props.description}
+                `;
+                layer.bindPopup(popupContent);
+              }
+            }}
+          />
+        )}
         
         {/* New areas added by user (still using circles) */}
         {showAreas && newAreas.map(area => (
