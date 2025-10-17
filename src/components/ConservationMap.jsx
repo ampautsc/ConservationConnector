@@ -57,6 +57,27 @@ function calculateDistance(lat1, lng1, lat2, lng2) {
   return R * c;
 }
 
+// Create a circular polygon from a point and area (in km²)
+// This is used to visualize conservation sites with only Point geometry as approximate polygons
+function createCircularPolygon(lat, lng, areaKm2, numPoints = 32) {
+  // Calculate radius from area: area = π * r²
+  const radiusKm = Math.sqrt(areaKm2 / Math.PI);
+  const radiusDegrees = radiusKm / 111.32; // Approximate km to degrees conversion
+  
+  const coordinates = [];
+  for (let i = 0; i <= numPoints; i++) {
+    const angle = (i * 360 / numPoints) * Math.PI / 180;
+    const dx = radiusDegrees * Math.cos(angle) / Math.cos(lat * Math.PI / 180);
+    const dy = radiusDegrees * Math.sin(angle);
+    coordinates.push([lng + dx, lat + dy]);
+  }
+  
+  return {
+    type: 'Polygon',
+    coordinates: [coordinates]
+  };
+}
+
 // Calculate gap between two conservation areas (edge to edge)
 function calculateGap(area1, area2) {
   const centerDistance = calculateDistance(area1.lat, area1.lng, area2.lat, area2.lng);
@@ -230,20 +251,33 @@ export default function ConservationMap() {
         setSiteAreas(transformedSites);
         
         // Create GeoJSON FeatureCollection from site data for polygon rendering
-        // Only include sites with Polygon or MultiPolygon geometry (exclude Point geometry)
+        // Include ALL sites - for those with Point geometry, create circular polygons from area
         const siteFeatures = validSites
-          .filter(site => site.geometry && (site.geometry.type === 'Polygon' || site.geometry.type === 'MultiPolygon'))
-          .map(site => ({
-            type: 'Feature',
-            properties: {
-              name: site.name,
-              description: site.description,
-              state: site.location.state || 'Unknown',
-              designation: site.designation,
-              area_km2: site.area.km2 || 0
-            },
-            geometry: site.geometry
-          }));
+          .filter(site => site.geometry)
+          .map(site => {
+            let geometry = site.geometry;
+            
+            // For Point geometry, create a circular polygon based on the site's area
+            if (site.geometry.type === 'Point' && site.area && site.area.km2) {
+              geometry = createCircularPolygon(
+                site.location.lat,
+                site.location.lng,
+                site.area.km2
+              );
+            }
+            
+            return {
+              type: 'Feature',
+              properties: {
+                name: site.name,
+                description: site.description,
+                state: site.location.state || 'Unknown',
+                designation: site.designation,
+                area_km2: site.area.km2 || 0
+              },
+              geometry: geometry
+            };
+          });
         
         setSiteGeoJsonData({
           type: 'FeatureCollection',
