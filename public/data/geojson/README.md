@@ -60,6 +60,76 @@ node scripts/simplify-geojson.cjs <input> <output> [tolerance]
 
 **Last Updated**: October 16, 2025
 
+### mo-conservation-polygons.geojson
+
+Contains simplified polygon geometries for 451 conservation areas in Missouri.
+
+**Format**: GeoJSON FeatureCollection with Polygon and MultiPolygon geometries
+
+**File Stats:**
+- Original coordinate points: 77,673 points
+- Simplified coordinate points: 13,586 points
+- Reduction: 82.5% using Douglas-Peucker algorithm with tolerance 0.001
+- File size: 1.59 MB
+- Features: 451 conservation areas
+
+**Filtering Criteria:**
+- Minimum area: 100 acres
+- Excludes: Recreation areas, parks, lakes, military land
+- Includes: Conservation areas, wilderness areas, wildlife refuges, national forests, conservation easements, wetland reserves
+
+**Data Processing:**
+1. Source files (PADUS3) converted from ESRI:102039 to WGS84 (EPSG:4326) using ogr2ogr
+2. Filtered for actual conservation areas (not recreational or military)
+3. Filtered for areas >= 100 acres
+4. Simplified using Douglas-Peucker algorithm
+5. Properties reduced to essential conservation metadata
+
+**Features include:**
+- `name`: Conservation area name
+- `designation`: Type of conservation designation (e.g., "Wilderness Area", "Conservation Easement")
+- `owner`: Land owner description
+- `manager`: Managing organization
+- `acres`: Area in acres
+- `state`: State (MO)
+- `access`: Public access level
+- `gapStatus`: GAP analysis protection status
+- `category`: Feature category
+- `geometry`: Polygon or MultiPolygon representing area boundaries
+
+**Top Conservation Areas (by size):**
+1. Mark Twain National Forest - 3,044,784 acres
+2. Big Muddy National Fish And Wildlife Refuge - 823,214 acres
+3. Ozark National Scenic Riverway - 82,332 acres
+4. Mingo National Wildlife Refuge - 21,699 acres
+5. Irish Wilderness - 16,509 acres
+6. Eleven Point, Missouri Wild and Scenic River - 15,418 acres
+7. Middle Mississippi River National Wildlife Refuge - 12,465 acres
+8. Hercules-Glades Wilderness - 12,425 acres
+
+**Data Source**: PADUS 3.0 (Protected Areas Database of the United States)
+- PADUS3_0Designation_StateMO.json
+- PADUS3_0Easement_StateMO.json
+- PADUS3_0Proclamation_StateMO.json
+
+**Generation Script**: Use `scripts/create-mo-conservation-polygons.cjs` to regenerate:
+```bash
+node scripts/create-mo-conservation-polygons.cjs [min-acres] [tolerance]
+# Example: node scripts/create-mo-conservation-polygons.cjs 100 0.001
+```
+
+**Last Updated**: October 17, 2025
+
+### PADUS3 Source Files
+
+The following source files contain the original PADUS 3.0 data for Missouri:
+
+- **PADUS3_0Designation_StateMO.json** (9.5 MB) - State and local conservation/recreation areas
+- **PADUS3_0Easement_StateMO.json** (7.1 MB) - Conservation and agricultural easements
+- **PADUS3_0Proclamation_StateMO.json** (3.9 MB) - National forests, wildlife refuges, and military lands
+
+These files use ESRI:102039 projection (USA Contiguous Albers Equal Area Conic) and are converted to WGS84 during processing.
+
 ## Usage
 
 The GeoJSON files can be loaded by the application or external GIS tools. The coordinate system used is WGS84 (EPSG:4326).
@@ -91,5 +161,5 @@ The GeoJSON files can be loaded by the application or external GIS tools. The co
 ## Notes
 
 - All coordinates are stored as [longitude, latitude] following GeoJSON specification
-- Areas are provided in square kilometers for consistency
+- Areas are provided in square kilometers for national parks, acres for Missouri conservation areas
 - Descriptions are kept concise while highlighting key features
