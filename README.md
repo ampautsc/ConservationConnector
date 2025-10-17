@@ -89,6 +89,8 @@ Without the token configured, the feedback form will still be accessible but wil
 
 ## Data Structure
 
+### Simple Format (conservation-areas.json)
+
 Conservation areas are stored in `public/data/conservation-areas.json` with the following format:
 
 ```json
@@ -103,6 +105,16 @@ Conservation areas are stored in `public/data/conservation-areas.json` with the 
   }
 ]
 ```
+
+### Detailed Site Data
+
+Comprehensive conservation site data is managed through:
+- **Schema**: `public/data/schema/conservation-site-schema.json` - JSON Schema defining site data structure
+- **Inventory**: `public/data/sites/INVENTORY.md` - Master list of sites (human-editable)
+- **Site Files**: `public/data/sites/*.json` - Individual JSON files for each site (auto-generated)
+- **Crawler**: Automated GitHub Action that generates site files from the inventory
+
+See [CONSERVATION_SITE_CRAWLER.md](CONSERVATION_SITE_CRAWLER.md) for details on the conservation site data system.
 
 ## Technologies
 
