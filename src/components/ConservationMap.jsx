@@ -84,15 +84,15 @@ function getHeatMapColor(gap) {
 
 export default function ConservationMap() {
   const [geoJsonData, setGeoJsonData] = useState(null);
-  const [moGeoJsonData, setMoGeoJsonData] = useState(null);
   const [conservationAreas, setConservationAreas] = useState([]);
+  const [siteAreas, setSiteAreas] = useState([]);
   const [newAreas, setNewAreas] = useState([]);
   const [isAddingArea, setIsAddingArea] = useState(false);
   const [newAreaRadius, setNewAreaRadius] = useState(25000);
   const [newAreaName, setNewAreaName] = useState('');
   const [showHeatMap, setShowHeatMap] = useState(true);
   const [showAreas, setShowAreas] = useState(true);
-  const [showMoAreas, setShowMoAreas] = useState(true);
+  const [showSiteAreas, setShowSiteAreas] = useState(true);
   const [showGradientHeatMap, setShowGradientHeatMap] = useState(false);
 
   // Load GeoJSON data and transform to internal format for heat map calculations
@@ -135,24 +135,73 @@ export default function ConservationMap() {
       })
       .catch(err => console.error('Error loading US National Parks GeoJSON data:', err));
 
-    // Load Missouri Conservation Areas
-    fetch('/data/geojson/mo-conservation-polygons.geojson')
-      .then(response => {
-        if (!response.ok) {
-          return response.text().then(text => {
-            throw new Error(`HTTP error! status: ${response.status}, body: ${text}`);
-          });
-        }
-        return response.json();
+    // Load individual conservation site files
+    // List of all site files to load
+    const siteFiles = [
+      'angeles-nf', 'angelina-nf', 'apache-sitgreaves-nf', 'apalachicola-nf',
+      'aransas-nwr', 'arctic-nwr', 'beaverhead-deerlodge-nf', 'big-bend-np',
+      'big-cypress-national-preserve', 'big-muddy-nwr', 'big-thicket-national-preserve',
+      'bighorn-nf', 'bridger-teton-nf', 'buenos-aires-nwr', 'caribou-targhee-nf',
+      'charles-m-russell-nwr', 'chugach-nf', 'coconino-nf', 'coronado-nf',
+      'custer-gallatin-nf', 'davy-crockett-nf', 'death-valley-np', 'denali-np',
+      'ding-darling-nwr', 'eleven-point-river', 'everglades-np', 'flaming-gorge-nra',
+      'flathead-nf', 'florida-panther-nwr', 'gates-of-arctic-np', 'glacier-bay-np',
+      'glacier-np', 'grand-canyon-np', 'grand-teton-np', 'guadalupe-mountains-np',
+      'helena-lewis-clark-nf', 'hercules-glades-wilderness', 'inyo-nf', 'irish-wilderness',
+      'joshua-tree-np', 'kaibab-nf', 'katmai-np', 'kootenai-nf', 'laguna-atascosa-nwr',
+      'lake-clark-np', 'lewis-and-clark-nf', 'lolo-nf', 'loxahatchee-nwr',
+      'mark-twain-nf', 'medicine-bow-routt-nf', 'merritt-island-nwr',
+      'middle-mississippi-river-nwr', 'mingo-nwr', 'mojave-national-preserve',
+      'national-elk-refuge', 'ocala-nf', 'ozark-nsr', 'padre-island-ns',
+      'petrified-forest-np', 'piney-creek-wilderness', 'prescott-nf', 'sabine-nf',
+      'saguaro-np', 'sam-houston-nf', 'san-bernardino-nf', 'seedskadee-nwr',
+      'sequoia-kings-canyon-np', 'sequoia-nf', 'shoshone-nf', 'sierra-nf',
+      'st-marks-nwr', 'swan-lake-nwr', 'ten-thousand-islands-nwr', 'tongass-nf',
+      'tonto-nf', 'wrangell-st-elias-np', 'yellowstone-np', 'yosemite-np',
+      'yukon-delta-nwr'
+    ];
+
+    // Load all site files
+    Promise.all(
+      siteFiles.map(siteId =>
+        fetch(`/data/sites/${siteId}.json`)
+          .then(response => {
+            if (!response.ok) {
+              console.warn(`Failed to load site: ${siteId}`);
+              return null;
+            }
+            return response.json();
+          })
+          .catch(err => {
+            console.warn(`Error loading site ${siteId}:`, err);
+            return null;
+          })
+      )
+    )
+      .then(sites => {
+        // Filter out null values (failed loads) and transform to internal format
+        const transformedSites = sites
+          .filter(site => site !== null)
+          .map(site => ({
+            id: site.id,
+            name: site.name,
+            lat: site.location.lat,
+            lng: site.location.lng,
+            // Calculate radius from area in km2
+            radius: Math.sqrt(site.area.km2 || 100) * 500,
+            description: site.description,
+            state: site.location.state || 'Unknown',
+            designation: site.designation,
+            area_km2: site.area.km2 || 0,
+            isSiteFile: true
+          }));
+        setSiteAreas(transformedSites);
       })
-      .then(data => {
-        setMoGeoJsonData(data);
-      })
-      .catch(err => console.error('Error loading Missouri conservation areas GeoJSON data:', err));
+      .catch(err => console.error('Error loading conservation sites:', err));
   }, []);
 
-  // All areas (existing + new)
-  const allAreas = useMemo(() => [...conservationAreas, ...newAreas], [conservationAreas, newAreas]);
+  // All areas (existing + sites + new)
+  const allAreas = useMemo(() => [...conservationAreas, ...siteAreas, ...newAreas], [conservationAreas, siteAreas, newAreas]);
 
   // Calculate heat map lines
   const heatMapLines = useMemo(() => {
@@ -258,10 +307,10 @@ export default function ConservationMap() {
           <label>
             <input 
               type="checkbox" 
-              checked={showMoAreas} 
-              onChange={(e) => setShowMoAreas(e.target.checked)}
+              checked={showSiteAreas} 
+              onChange={(e) => setShowSiteAreas(e.target.checked)}
             />
-            Show Missouri Conservation Areas
+            Show Conservation Sites
           </label>
           <label>
             <input 
@@ -371,7 +420,11 @@ export default function ConservationMap() {
             <h4>Areas</h4>
             <div className="legend-item">
               <span className="legend-circle existing"></span>
-              <span>Existing Areas</span>
+              <span>US National Parks</span>
+            </div>
+            <div className="legend-item">
+              <span style={{width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ff8833', border: '2px solid #ff6600', display: 'inline-block', marginRight: '5px'}}></span>
+              <span>Conservation Sites</span>
             </div>
             <div className="legend-item">
               <span className="legend-circle new"></span>
@@ -383,7 +436,8 @@ export default function ConservationMap() {
         <div className="tool-section stats">
           <h3>Statistics</h3>
           <p>Total Areas: {allAreas.length}</p>
-          <p>Existing: {conservationAreas.length}</p>
+          <p>US National Parks: {conservationAreas.length}</p>
+          <p>Conservation Sites: {siteAreas.length}</p>
           <p>New: {newAreas.length}</p>
           <p>Connections: {heatMapLines.length}</p>
         </div>
@@ -450,34 +504,28 @@ export default function ConservationMap() {
           />
         )}
         
-        {/* Missouri conservation areas from GeoJSON */}
-        {showMoAreas && moGeoJsonData && (
-          <GeoJSON 
-            data={moGeoJsonData}
-            style={() => ({
-              fillColor: '#00cc66',
-              color: '#009944',
-              weight: 2,
-              opacity: 0.8,
-              fillOpacity: 0.4
-            })}
-            onEachFeature={(feature, layer) => {
-              // Bind popup to each feature
-              if (feature.properties) {
-                const props = feature.properties;
-                const popupContent = `
-                  <strong>${props.name}</strong><br />
-                  ${props.state || 'Missouri'}<br />
-                  ${props.designation ? `Type: ${props.designation}<br />` : ''}
-                  ${props.acres ? `Area: ${props.acres.toLocaleString()} acres<br />` : ''}
-                  ${props.manager ? `Manager: ${props.manager}<br />` : ''}
-                  ${props.owner ? `Owner: ${props.owner}` : ''}
-                `;
-                layer.bindPopup(popupContent);
-              }
+        {/* Conservation site areas from individual JSON files */}
+        {showSiteAreas && siteAreas.map(area => (
+          <Circle
+            key={area.id}
+            center={[area.lat, area.lng]}
+            radius={area.radius}
+            pathOptions={{
+              color: '#ff6600',
+              fillColor: '#ff8833',
+              fillOpacity: 0.3,
+              weight: 2
             }}
-          />
-        )}
+          >
+            <Popup>
+              <strong>{area.name}</strong><br />
+              {area.state}<br />
+              {area.designation}<br />
+              {area.area_km2 ? `Area: ${area.area_km2.toFixed(1)} km²<br />` : ''}
+              {area.description}
+            </Popup>
+          </Circle>
+        ))}
         
         {/* New areas added by user (still using circles) */}
         {showAreas && newAreas.map(area => (
