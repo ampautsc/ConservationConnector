@@ -116,7 +116,15 @@ export default function ConservationMap() {
         // Transform GeoJSON features to internal format for heat map calculations
         // Calculate centroids for polygon geometries
         const transformedAreas = data.features.map((feature, index) => {
-          const centroid = calculateCentroid(feature.geometry);
+          const geometry = feature.geometry;
+          let centroid;
+          
+          if (geometry.type === 'Point') {
+            centroid = { lat: geometry.coordinates[1], lng: geometry.coordinates[0] };
+          } else {
+            centroid = calculateCentroid(geometry);
+          }
+          
           return {
             id: `park-${index}`,
             name: feature.properties.name,
@@ -182,19 +190,32 @@ export default function ConservationMap() {
         // Filter out null values (failed loads) and transform to internal format
         const transformedSites = sites
           .filter(site => site !== null)
-          .map(site => ({
-            id: site.id,
-            name: site.name,
-            lat: site.location.lat,
-            lng: site.location.lng,
-            // Calculate radius from area in km2
-            radius: Math.sqrt(site.area.km2 || 100) * 500,
-            description: site.description,
-            state: site.location.state || 'Unknown',
-            designation: site.designation,
-            area_km2: site.area.km2 || 0,
-            isSiteFile: true
-          }));
+          .map(site => {
+            const geometry = site.geometry;
+            let centroid;
+            
+            // Calculate centroid based on geometry type
+            if (geometry.type === 'Point') {
+              centroid = { lat: geometry.coordinates[1], lng: geometry.coordinates[0] };
+            } else {
+              centroid = calculateCentroid(geometry);
+            }
+            
+            return {
+              id: site.id,
+              name: site.name,
+              lat: centroid.lat,
+              lng: centroid.lng,
+              // Calculate radius from area in km2
+              radius: Math.sqrt(site.area.km2 || 100) * 500,
+              description: site.description,
+              state: site.location.state || 'Unknown',
+              designation: site.designation,
+              area_km2: site.area.km2 || 0,
+              isSiteFile: true,
+              geometry: geometry // Keep the original geometry for rendering
+            };
+          });
         setSiteAreas(transformedSites);
       })
       .catch(err => console.error('Error loading conservation sites:', err));
@@ -505,27 +526,70 @@ export default function ConservationMap() {
         )}
         
         {/* Conservation site areas from individual JSON files */}
-        {showSiteAreas && siteAreas.map(area => (
-          <Circle
-            key={area.id}
-            center={[area.lat, area.lng]}
-            radius={area.radius}
-            pathOptions={{
-              color: '#ff6600',
-              fillColor: '#ff8833',
-              fillOpacity: 0.3,
-              weight: 2
-            }}
-          >
-            <Popup>
-              <strong>{area.name}</strong><br />
-              {area.state}<br />
-              {area.designation}<br />
-              {area.area_km2 ? `Area: ${area.area_km2.toFixed(1)} km²<br />` : ''}
-              {area.description}
-            </Popup>
-          </Circle>
-        ))}
+        {showSiteAreas && siteAreas.map(area => {
+          // If the site has polygon/multipolygon geometry, render as GeoJSON
+          if (area.geometry && (area.geometry.type === 'Polygon' || area.geometry.type === 'MultiPolygon')) {
+            const geoJsonFeature = {
+              type: 'Feature',
+              geometry: area.geometry,
+              properties: {
+                name: area.name,
+                state: area.state,
+                designation: area.designation,
+                area_km2: area.area_km2,
+                description: area.description
+              }
+            };
+            
+            return (
+              <GeoJSON
+                key={area.id}
+                data={geoJsonFeature}
+                style={() => ({
+                  fillColor: '#ff8833',
+                  color: '#ff6600',
+                  weight: 2,
+                  opacity: 0.8,
+                  fillOpacity: 0.3
+                })}
+                onEachFeature={(feature, layer) => {
+                  const props = feature.properties;
+                  const popupContent = `
+                    <strong>${props.name}</strong><br />
+                    ${props.state}<br />
+                    ${props.designation}<br />
+                    ${props.area_km2 ? `Area: ${props.area_km2.toFixed(1)} km²<br />` : ''}
+                    ${props.description}
+                  `;
+                  layer.bindPopup(popupContent);
+                }}
+              />
+            );
+          }
+          
+          // Otherwise, render as a circle (for Point geometry or backward compatibility)
+          return (
+            <Circle
+              key={area.id}
+              center={[area.lat, area.lng]}
+              radius={area.radius}
+              pathOptions={{
+                color: '#ff6600',
+                fillColor: '#ff8833',
+                fillOpacity: 0.3,
+                weight: 2
+              }}
+            >
+              <Popup>
+                <strong>{area.name}</strong><br />
+                {area.state}<br />
+                {area.designation}<br />
+                {area.area_km2 ? `Area: ${area.area_km2.toFixed(1)} km²<br />` : ''}
+                {area.description}
+              </Popup>
+            </Circle>
+          );
+        })}
         
         {/* New areas added by user (still using circles) */}
         {showAreas && newAreas.map(area => (
