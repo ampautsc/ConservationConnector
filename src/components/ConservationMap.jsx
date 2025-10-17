@@ -63,6 +63,12 @@ function calculateGap(area1, area2) {
   return Math.max(0, centerDistance - area1.radius - area2.radius);
 }
 
+// Color constants for conservation areas
+const CONSERVATION_SITE_COLORS = {
+  fill: '#ff8833',
+  stroke: '#cc6622'
+};
+
 // Get color for heat map based on gap distance
 // Colors are assigned based on specific distance thresholds:
 // 0-25 miles: green
@@ -438,7 +444,7 @@ export default function ConservationMap() {
               <span>US National Parks</span>
             </div>
             <div className="legend-item">
-              <span className="legend-circle" style={{background: '#ff8833', border: '2px solid #cc6622'}}></span>
+              <span className="legend-circle" style={{background: CONSERVATION_SITE_COLORS.fill, border: `2px solid ${CONSERVATION_SITE_COLORS.stroke}`}}></span>
               <span>Conservation Sites (NF, NWR, etc.)</span>
             </div>
             <div className="legend-item">
@@ -524,8 +530,8 @@ export default function ConservationMap() {
           <GeoJSON 
             data={siteGeoJsonData}
             style={() => ({
-              fillColor: '#ff8833',
-              color: '#cc6622',
+              fillColor: CONSERVATION_SITE_COLORS.fill,
+              color: CONSERVATION_SITE_COLORS.stroke,
               weight: 2,
               opacity: 0.8,
               fillOpacity: 0.4
