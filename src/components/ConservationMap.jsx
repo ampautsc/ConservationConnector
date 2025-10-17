@@ -102,6 +102,9 @@ export default function ConservationMap() {
 
   // State for site GeoJSON data
   const [siteGeoJsonData, setSiteGeoJsonData] = useState(null);
+  
+  // State for Missouri conservation polygons
+  const [moConservationData, setMoConservationData] = useState(null);
 
   // Load GeoJSON data and transform to internal format for heat map calculations
   useEffect(() => {
@@ -142,6 +145,21 @@ export default function ConservationMap() {
         setConservationAreas(transformedAreas);
       })
       .catch(err => console.error('Error loading US National Parks GeoJSON data:', err));
+
+    // Load Missouri conservation polygons
+    fetch('/data/geojson/mo-conservation-polygons.geojson')
+      .then(response => {
+        if (!response.ok) {
+          return response.text().then(text => {
+            throw new Error(`HTTP error! status: ${response.status}, body: ${text}`);
+          });
+        }
+        return response.json();
+      })
+      .then(data => {
+        setMoConservationData(data);
+      })
+      .catch(err => console.error('Error loading Missouri conservation polygons:', err));
 
     // Load individual conservation site files
     // List of all site files to load
@@ -207,8 +225,9 @@ export default function ConservationMap() {
         setSiteAreas(transformedSites);
         
         // Create GeoJSON FeatureCollection from site data for polygon rendering
+        // Only include sites with Polygon or MultiPolygon geometry (exclude Point geometry)
         const siteFeatures = validSites
-          .filter(site => site.geometry) // Only include sites with geometry
+          .filter(site => site.geometry && (site.geometry.type === 'Polygon' || site.geometry.type === 'MultiPolygon'))
           .map(site => ({
             type: 'Feature',
             properties: {
@@ -500,6 +519,7 @@ export default function ConservationMap() {
         {/* Conservation areas from GeoJSON - now showing actual shapes */}
         {showAreas && geoJsonData && (
           <GeoJSON 
+            key="us-national-parks"
             data={geoJsonData}
             style={() => ({
               fillColor: '#3388ff',
@@ -525,9 +545,39 @@ export default function ConservationMap() {
           />
         )}
         
-        {/* Conservation site areas from individual JSON files - now showing polygons */}
+        {/* Missouri conservation areas - polygons from PADUS data */}
+        {showAreas && moConservationData && (
+          <GeoJSON 
+            key="mo-conservation-areas"
+            data={moConservationData}
+            style={() => ({
+              fillColor: CONSERVATION_SITE_COLORS.fill,
+              color: CONSERVATION_SITE_COLORS.stroke,
+              weight: 2,
+              opacity: 0.8,
+              fillOpacity: 0.4
+            })}
+            onEachFeature={(feature, layer) => {
+              // Bind popup to each feature
+              if (feature.properties) {
+                const props = feature.properties;
+                const popupContent = `
+                  <strong>${props.name}</strong><br />
+                  ${props.state}<br />
+                  ${props.designation ? `Designation: ${props.designation}<br />` : ''}
+                  ${props.acres ? `Area: ${Math.round(props.acres).toLocaleString()} acres<br />` : ''}
+                  ${props.manager ? `Manager: ${props.manager}<br />` : ''}
+                `;
+                layer.bindPopup(popupContent);
+              }
+            }}
+          />
+        )}
+        
+        {/* Conservation site areas from individual JSON files - only polygons, not points */}
         {showAreas && siteGeoJsonData && (
           <GeoJSON 
+            key="site-conservation-areas"
             data={siteGeoJsonData}
             style={() => ({
               fillColor: CONSERVATION_SITE_COLORS.fill,
