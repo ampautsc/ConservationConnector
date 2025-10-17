@@ -19,7 +19,7 @@ All conservation site files were added with Point geometry (center coordinates o
 - Updated metadata with data quality = "high" and source attribution
 
 **Missouri Sites Approach**:
-- Extracted polygon data from existing `mo-conservation-polygons.geojson` file (PADUS 3.0)
+- Extracted polygon data from PADUS 3.0 dataset
 - Matched sites by name, supporting multiple feature matches for complex areas
 - Combined multiple features into MultiPolygon where applicable
 - Updated metadata with data quality = "high" and source attribution
@@ -60,7 +60,7 @@ All conservation site files were added with Point geometry (center coordinates o
 10. Middle Mississippi River National Wildlife Refuge
 
 **Script**: `scripts/update-missouri-from-polygons.cjs`
-**Data Source**: Existing `mo-conservation-polygons.geojson` file (from PADUS 3.0)
+**Data Source**: PADUS 3.0 dataset
 
 ### Phase 2: Remaining Sites (⏳ Pending Data)
 

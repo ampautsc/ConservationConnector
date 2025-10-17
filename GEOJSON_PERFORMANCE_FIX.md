@@ -12,12 +12,12 @@ These files were committed to the repository, increasing repo size and potential
 
 ## Root Cause Analysis
 
-1. **Files Were Source Data, Not Application Data**: The PADUS3 files are source files used to generate the simplified `mo-conservation-polygons.geojson` file. They are NOT loaded by the application.
+1. **Files Were Source Data, Not Application Data**: The PADUS3 files are source files that are NOT loaded by the application.
 
 2. **Application Only Loads Simplified Files**: The application (`src/components/ConservationMap.jsx`) only loads:
    - `us-national-parks-polygons.geojson` (2.1 MB) - Already simplified
    - Individual site files (small, ~500 bytes each)
-   - Does NOT load the PADUS3 source files or `mo-conservation-polygons.geojson`
+   - Does NOT load the PADUS3 source files
 
 3. **Files Should Not Be in Repository**: According to best practices and the existing `.gitignore` pattern, source files should be excluded from version control.
 
@@ -57,17 +57,11 @@ The following processed/simplified files remain in the repository and are ready 
    - 97.4% coordinate reduction (945,654 → 24,513 points)
    - **Currently loaded by the application** ✅
 
-2. **mo-conservation-polygons.geojson** (1.6 MB)
-   - 451 features
-   - 82.5% coordinate reduction
-   - Generated from PADUS3 source files
-   - **Not currently loaded by application** (available for future use)
-
-3. **us-national-parks.geojson** (23 KB)
+2. **us-national-parks.geojson** (23 KB)
    - Point geometries for 63 national parks
    - Lightweight reference data
 
-4. **Individual site files** (~500 bytes each)
+3. **Individual site files** (~500 bytes each)
    - 71 individual conservation sites
    - **Currently loaded by the application** ✅
 
@@ -90,7 +84,6 @@ npm run lint
 ### File Validation
 ```bash
 # ✅ us-national-parks-polygons.geojson: Valid JSON (62 features)
-# ✅ mo-conservation-polygons.geojson: Valid JSON (451 features)
 ```
 
 ## Performance Impact
@@ -114,20 +107,14 @@ npm run lint
 
 ## How to Regenerate PADUS3 Files (If Needed)
 
-If developers need to regenerate or modify the Missouri conservation data:
+If developers need to download PADUS3 source files:
 
 1. **Download PADUS3 source files:**
    ```bash
    node scripts/fetch-padus-boundaries.cjs
    ```
 
-2. **Generate simplified mo-conservation-polygons.geojson:**
-   ```bash
-   node scripts/create-mo-conservation-polygons.cjs [min-acres] [tolerance]
-   # Example: node scripts/create-mo-conservation-polygons.cjs 100 0.001
-   ```
-
-3. **Source files will be downloaded to** `public/data/geojson/` but won't be committed due to `.gitignore`
+2. **Source files will be downloaded to** `public/data/geojson/` but won't be committed due to `.gitignore`
 
 ## Best Practices Established
 
