@@ -19,7 +19,7 @@ Updated conservation site JSON files with accurate polygon/multipolygon boundari
 - Data quality: High
 
 #### Phase 2: Missouri Sites (10 sites)
-- Updated with polygon boundaries from existing `mo-conservation-polygons.geojson`
+- Updated with polygon boundaries from PADUS 3.0 Missouri Dataset
 - Data source: PADUS 3.0 Missouri Dataset
 - Includes: Mark Twain NF, Big Muddy NWR, Ozark NSR, wilderness areas
 - Data quality: High

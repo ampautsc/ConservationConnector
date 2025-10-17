@@ -12,7 +12,7 @@
 
 **Missouri Conservation Sites with Accurate Polygon Boundaries** (10 sites):
 - Updated 10 Missouri conservation sites with polygon boundaries
-- Data sourced from existing `mo-conservation-polygons.geojson` file (PADUS 3.0)
+- Data sourced from PADUS 3.0 dataset
 - Includes National Forest, Wildlife Refuges, Wilderness Areas, and Scenic Rivers
 - All updated with `dataQuality: "high"` metadata
 

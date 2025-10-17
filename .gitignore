@@ -37,6 +37,3 @@ public/data/geojson/sources/*.json
 
 # PADUS3 source files (large files used to generate simplified versions)
 public/data/geojson/PADUS3_*.json
-
-# Missouri conservation polygons file (no longer used, data now in conservation-areas.json)
-public/data/geojson/mo-conservation-polygons.geojson
