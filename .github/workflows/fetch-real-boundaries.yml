@@ -1,28 +1,22 @@
-name: Fetch Real Conservation Area Boundaries
+name: Fetch Real Conservation Area Boundaries (DISABLED - See MANUAL_BOUNDARY_UPDATE_GUIDE.md)
+
+# This workflow is disabled because API fetching doesn't work reliably in GitHub Actions.
+# Government APIs are blocked, rate-limited, or return no data.
+# See MANUAL_BOUNDARY_UPDATE_GUIDE.md for the manual update process.
 
 on:
-  # Run on push to main branch when the fetch script changes
-  push:
-    branches:
-      - main
-    paths:
-      - 'scripts/fetch-all-real-boundaries.cjs'
-  
-  # Allow manual trigger
+  # Disabled - do not run automatically
+  # workflow_dispatch is kept for potential future use if API access improves
   workflow_dispatch:
     inputs:
       force_update:
-        description: 'Force update all sites (including those with high quality data)'
+        description: 'WARNING: This workflow does not work due to API restrictions. See MANUAL_BOUNDARY_UPDATE_GUIDE.md instead.'
         required: false
         default: 'false'
         type: choice
         options:
           - 'false'
           - 'true'
-  
-  # Run weekly to check for boundary updates from government APIs
-  schedule:
-    - cron: '0 2 * * 1' # Every Monday at 2 AM UTC
 
 jobs:
   fetch-boundaries:
@@ -30,7 +24,23 @@ jobs:
     name: Fetch Real Boundary Data
     
     steps:
-      - name: Checkout repository
+      - name: ⚠️ WARNING - This workflow does not work
+        run: |
+          echo "================================================"
+          echo "⚠️  WARNING: This workflow is disabled"
+          echo "================================================"
+          echo ""
+          echo "API fetching does not work reliably in GitHub Actions."
+          echo "Government APIs are blocked, rate-limited, or return no data."
+          echo ""
+          echo "For updating site boundaries, please use the manual process:"
+          echo "See MANUAL_BOUNDARY_UPDATE_GUIDE.md in the repository root"
+          echo ""
+          echo "This workflow run will exit without making changes."
+          echo "================================================"
+          exit 1
+      
+      - name: Checkout repository (NOT REACHED)
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
