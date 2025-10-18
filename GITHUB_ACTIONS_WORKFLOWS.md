@@ -18,7 +18,33 @@ This workflow automatically fetches real boundary data from government APIs and 
 - **Scheduled**: Runs automatically every Monday at 2 AM UTC
 - **On Push**: Runs when `scripts/fetch-all-real-boundaries.cjs` is updated
 
-#### What It Does
+### How It Works
+
+### Incremental Processing Strategy
+
+To avoid overwhelming government APIs and prevent connection issues, the script uses an incremental approach:
+
+**Processing Limits:**
+- **10 sites per run** - Prevents rate limiting and connection resets
+- **3-5 second delays** between requests - Respectful to government servers
+- **5 retry attempts** with exponential backoff - Handles transient failures
+- **Random jitter** - Avoids thundering herd problems
+
+**Why Incremental?**
+- Government APIs may have rate limits or connection limits
+- Processing all 49 sites at once can cause ECONNRESET errors
+- Weekly runs will gradually update all sites over time
+- More reliable than trying to do everything in one run
+
+**Timeline:**
+- Week 1: Sites 1-10 updated
+- Week 2: Sites 11-20 updated
+- Week 3: Sites 21-30 updated
+- Week 4: Sites 31-40 updated
+- Week 5: Sites 41-49 updated
+- Week 6+: Maintenance mode (checking for updates to existing boundaries)
+
+### What The Script Does
 
 1. Checks out the repository
 2. Sets up Node.js environment
@@ -126,14 +152,33 @@ You can configure notifications in GitHub Settings:
 
 ## Troubleshooting
 
+### Troubleshooting
+
 ### Workflow Fails to Fetch Boundaries
 
-If the workflow fails:
+If the workflow fails with connection errors:
 
-1. Check the workflow logs for API errors
-2. Verify the government API endpoints are accessible
-3. Check if API field names have changed
-4. Review rate limiting (workflow includes 1-second delays)
+1. **Check the workflow logs** for specific error messages:
+   - `ECONNRESET` - Connection was reset, usually due to rate limiting or network issues
+   - `ETIMEDOUT` - Request timed out, API may be slow or unreachable
+   - `429` - Rate limited by the API
+
+2. **Retry Strategy**: The script includes built-in retry logic with exponential backoff:
+   - 5 retry attempts per request
+   - Initial 2-second delay, increasing with each retry
+   - Random jitter to avoid thundering herd issues
+   - Special handling for rate limits (429 responses)
+
+3. **Incremental Processing**: The script processes up to 10 sites per run:
+   - Prevents overwhelming the APIs
+   - Each weekly run will process the next batch
+   - Sites with high-quality data are automatically skipped
+   - All sites will eventually be updated over several weeks
+
+4. **Manual Trigger**: If needed, manually trigger the workflow:
+   - Go to Actions → Fetch Real Conservation Area Boundaries
+   - Click "Run workflow"
+   - This will process the next 10 sites that need updates
 
 The workflow uses `continue-on-error: true` in the deployment workflow, so failures won't block deployments.
 

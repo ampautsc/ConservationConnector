@@ -27,28 +27,73 @@ console.log('Real Boundary Data Fetcher');
 console.log('==========================\n');
 
 /**
- * Make an HTTPS request
+ * Make an HTTPS request with retry logic and exponential backoff
  */
-function httpsRequest(url) {
+function httpsRequest(url, retries = 5, initialDelay = 2000) {
   return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
-      let data = '';
+    const attemptRequest = (attemptsLeft, currentDelay) => {
+      const request = https.get(url, {
+        timeout: 45000,
+        headers: {
+          'User-Agent': 'ConservationConnector/1.0 (+https://github.com/ampautsc/ConservationConnector)',
+          'Accept': 'application/json, application/geo+json',
+          'Accept-Encoding': 'gzip, deflate'
+        }
+      }, (res) => {
+        let data = '';
+        
+        res.on('data', (chunk) => data += chunk);
+        
+        res.on('end', () => {
+          if (res.statusCode >= 200 && res.statusCode < 300) {
+            resolve(data);
+          } else if (res.statusCode === 429) {
+            // Rate limited - wait longer
+            if (attemptsLeft > 0) {
+              const waitTime = currentDelay * 3;
+              console.log(`  ⏳ Rate limited (429), waiting ${waitTime/1000}s before retry...`);
+              setTimeout(() => attemptRequest(attemptsLeft - 1, waitTime), waitTime);
+            } else {
+              reject(new Error('Rate limit exceeded, no retries left'));
+            }
+          } else if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+            resolve(httpsRequest(res.headers.location, retries, initialDelay));
+          } else if (res.statusCode >= 500 && attemptsLeft > 0) {
+            // Server error - retry with backoff
+            console.log(`  ⟳ Server error (${res.statusCode}), retrying in ${currentDelay/1000}s... (${attemptsLeft} left)`);
+            setTimeout(() => attemptRequest(attemptsLeft - 1, currentDelay * 2), currentDelay);
+          } else {
+            reject(new Error(`HTTP ${res.statusCode}: ${data.substring(0, 200)}`));
+          }
+        });
+      });
       
-      res.on('data', (chunk) => data += chunk);
-      
-      res.on('end', () => {
-        if (res.statusCode >= 200 && res.statusCode < 300) {
-          resolve(data);
-        } else if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-          resolve(httpsRequest(res.headers.location));
+      request.on('error', (err) => {
+        const retryableErrors = ['ECONNRESET', 'ETIMEDOUT', 'ENOTFOUND', 'ECONNREFUSED', 'EHOSTUNREACH'];
+        if (attemptsLeft > 0 && retryableErrors.includes(err.code)) {
+          // Add jitter to avoid thundering herd
+          const jitter = Math.random() * 1000;
+          const waitTime = currentDelay + jitter;
+          console.log(`  ⟳ ${err.code}, retrying in ${(waitTime/1000).toFixed(1)}s... (${attemptsLeft} left)`);
+          setTimeout(() => attemptRequest(attemptsLeft - 1, currentDelay * 1.5), waitTime);
         } else {
-          reject(new Error(`HTTP ${res.statusCode}: ${data.substring(0, 200)}`));
+          reject(err);
         }
       });
-    }).on('error', reject).setTimeout(60000, function() {
-      this.destroy();
-      reject(new Error('Request timeout'));
-    });
+      
+      request.on('timeout', () => {
+        request.destroy();
+        if (attemptsLeft > 0) {
+          const waitTime = currentDelay * 1.5;
+          console.log(`  ⟳ Timeout, retrying in ${(waitTime/1000).toFixed(1)}s... (${attemptsLeft} left)`);
+          setTimeout(() => attemptRequest(attemptsLeft - 1, waitTime), waitTime);
+        } else {
+          reject(new Error('Request timeout after all retries'));
+        }
+      });
+    };
+    
+    attemptRequest(retries, initialDelay);
   });
 }
 
@@ -197,7 +242,17 @@ async function processAllSites() {
   let failed = 0;
   let skipped = 0;
   
+  // Limit processing to avoid overwhelming APIs in a single run
+  const MAX_SITES_PER_RUN = 10;
+  let sitesProcessedInRun = 0;
+  
   for (const [siteId, config] of Object.entries(SITE_CONFIG)) {
+    // Stop if we've processed enough sites in this run
+    if (sitesProcessedInRun >= MAX_SITES_PER_RUN && updated > 0) {
+      console.log(`\n⏸ Reached limit of ${MAX_SITES_PER_RUN} sites per run. Run again to process more.`);
+      break;
+    }
+    
     // Check if site already has high quality data
     const filePath = path.join(sitesDir, `${siteId}.json`);
     try {
@@ -211,7 +266,8 @@ async function processAllSites() {
       console.log(`\n⚠ Warning: Could not read ${siteId}.json`);
     }
     
-    console.log(`\nProcessing: ${siteId}`);
+    console.log(`\nProcessing: ${siteId} (${sitesProcessedInRun + 1}/${MAX_SITES_PER_RUN} this run)`);
+    sitesProcessedInRun++;
     
     try {
       const apiUrl = APIs[config.api];
@@ -238,11 +294,15 @@ async function processAllSites() {
       processed++;
       
       // Rate limiting - be respectful to government APIs
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Increased delay to avoid connection resets
+      await new Promise(resolve => setTimeout(resolve, 3000));
       
     } catch (error) {
       console.log(`  ✗ Error: ${error.message}`);
       failed++;
+      
+      // Add extra delay after errors to avoid overwhelming the API
+      await new Promise(resolve => setTimeout(resolve, 5000));
     }
   }
   
@@ -257,6 +317,11 @@ async function processAllSites() {
     console.log('  - USFS: National Forest boundaries');
     console.log('  - USFWS: Wildlife Refuge boundaries');
     console.log('  - NPS: National Park Service unit boundaries\n');
+    console.log('Note: Processing up to 10 sites per run to avoid API rate limits.\n');
+    console.log('Waiting 2 seconds before starting...\n');
+    
+    // Initial delay to let any previous connections close
+    await new Promise(resolve => setTimeout(resolve, 2000));
     
     const result = await processAllSites();
     

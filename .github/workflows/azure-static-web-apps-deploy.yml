@@ -37,7 +37,12 @@ jobs:
       - name: Fetch real boundaries before build
         run: |
           echo "Fetching real boundary data from government APIs..."
-          node scripts/fetch-all-real-boundaries.cjs || echo "Boundary fetch failed, continuing with existing data"
+          echo "Note: This may take several minutes due to rate limiting."
+          node scripts/fetch-all-real-boundaries.cjs || {
+            echo "⚠️ Boundary fetch encountered errors, continuing with existing data"
+            echo "Check the logs above for details on which sites failed"
+            exit 0
+          }
         continue-on-error: true
       
       - name: Build application
