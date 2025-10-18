@@ -23,7 +23,7 @@ jobs:
         with:
           submodules: true
           lfs: false
-          persist-credentials: false
+          persist-credentials: true
       
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -44,6 +44,26 @@ jobs:
             exit 0
           }
         continue-on-error: true
+      
+      - name: Check for site data changes
+        id: check-changes
+        run: |
+          if git diff --exit-code -- public/data/sites/*.json > /dev/null 2>&1; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No changes to site data"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "Site data has been updated"
+          fi
+      
+      - name: Commit and push updated site data
+        if: steps.check-changes.outputs.changes == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -- public/data/sites/*.json
+          git commit -m "chore: update site data during deployment [automated]"
+          git push
       
       - name: Build application
         env:
