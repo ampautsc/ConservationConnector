@@ -20,6 +20,7 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const { URL } = require('url');
 
 const sitesDir = path.join(__dirname, '../public/data/sites');
 
@@ -28,18 +29,39 @@ console.log('==========================\n');
 
 /**
  * Make an HTTPS request with retry logic and exponential backoff
+ * 
+ * IMPORTANT: Using a fresh agent for each request to avoid connection reuse issues
+ * that can cause ECONNRESET errors with some government APIs.
  */
 function httpsRequest(url, retries = 5, initialDelay = 2000) {
   return new Promise((resolve, reject) => {
     const attemptRequest = (attemptsLeft, currentDelay) => {
-      const request = https.get(url, {
+      // Create a new agent for each request to avoid connection pooling issues
+      const agent = new https.Agent({
+        keepAlive: false,  // Don't reuse connections - prevents ECONNRESET
+        maxSockets: 1,
+        timeout: 45000
+      });
+      
+      const urlObj = new URL(url);
+      const options = {
+        hostname: urlObj.hostname,
+        port: urlObj.port || 443,
+        path: urlObj.pathname + urlObj.search,
+        method: 'GET',
+        agent: agent,
         timeout: 45000,
         headers: {
           'User-Agent': 'ConservationConnector/1.0 (+https://github.com/ampautsc/ConservationConnector)',
           'Accept': 'application/json, application/geo+json',
-          'Accept-Encoding': 'gzip, deflate'
-        }
-      }, (res) => {
+          'Accept-Encoding': 'identity',  // Don't use compression to avoid issues
+          'Connection': 'close'  // Explicitly close connection after request
+        },
+        // Ensure we use modern TLS
+        minVersion: 'TLSv1.2'
+      };
+      
+      const request = https.request(options, (res) => {
         let data = '';
         
         res.on('data', (chunk) => data += chunk);
@@ -91,6 +113,9 @@ function httpsRequest(url, retries = 5, initialDelay = 2000) {
           reject(new Error('Request timeout after all retries'));
         }
       });
+      
+      // Actually send the request
+      request.end();
     };
     
     attemptRequest(retries, initialDelay);

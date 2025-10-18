@@ -154,6 +154,24 @@ You can configure notifications in GitHub Settings:
 
 ### Troubleshooting
 
+### Connection Reset Errors (ECONNRESET)
+
+**Root Cause Identified:**
+If you see **all requests failing** with `ECONNRESET` from the start (not just after several successful requests), this indicates a connection reuse/pooling issue rather than rate limiting.
+
+**The Fix:**
+The script now:
+1. **Creates fresh agents** for each request instead of reusing connections
+2. **Disables keepAlive** to prevent connection pooling issues
+3. **Forces connection close** after each request with `Connection: close` header
+4. **Uses TLS 1.2+** to ensure compatibility with government servers
+5. **Disables compression** initially with `Accept-Encoding: identity` to avoid protocol issues
+
+**Why This Matters:**
+- Government APIs may close idle connections aggressively
+- Connection reuse can cause ECONNRESET when the server has already closed the connection
+- Node.js's default HTTPS agent pools connections, which can conflict with servers that don't support persistent connections well
+
 ### Workflow Fails to Fetch Boundaries
 
 If the workflow fails with connection errors:
