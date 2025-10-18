@@ -34,6 +34,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
       
+      - name: Fetch real boundaries before build
+        run: |
+          echo "Fetching real boundary data from government APIs..."
+          node scripts/fetch-all-real-boundaries.cjs || echo "Boundary fetch failed, continuing with existing data"
+        continue-on-error: true
+      
       - name: Build application
         env:
           VITE_GITHUB_TOKEN: ${{ secrets.VITE_GITHUB_TOKEN }}
