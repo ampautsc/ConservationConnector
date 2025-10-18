@@ -11,6 +11,9 @@
  * where=FORESTNAME='Angeles National Forest'&outFields=FORESTNAME&returnGeometry=true&
  * outSR=4326&maxAllowableOffset=0.01&geometryPrecision=5&f=geojson
  * 
+ * IMPORTANT: This script requires internet access to U.S. government APIs.
+ * Run this script in an environment with unrestricted internet access.
+ * 
  * Usage: node scripts/fetch-all-real-boundaries.cjs
  */
 
