@@ -48,7 +48,7 @@ jobs:
       - name: Check for site data changes
         id: check-changes
         run: |
-          if git diff --exit-code -- 'public/data/sites/*.json' > /dev/null 2>&1; then
+          if git diff --exit-code -- public/data/sites/*.json > /dev/null 2>&1; then
             echo "changes=false" >> $GITHUB_OUTPUT
             echo "No changes to site data"
           else
