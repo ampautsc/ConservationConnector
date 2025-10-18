@@ -122,8 +122,8 @@ Download all boundaries ahead of time and include them in a data bundle.
 - mojave-national-preserve
 - padre-island-ns
 
-### Special Areas (1 site needing update)
-- flaming-gorge-nra
+### USFS Recreation Areas (1 site needing update)
+- flaming-gorge-nra (managed by Ashley National Forest)
 
 **Total: 49 sites remaining**
 
